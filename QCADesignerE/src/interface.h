@@ -35,9 +35,11 @@
 //!Structure holding main window widgets
 typedef struct
   {
+  GtkWidget *combo;
   GtkWidget *bus_layout_button;
   GtkWidget *bus_layout_menu_item;
   GtkWidget *clocks_combo_table;
+  GtkWidget *clocks_count_spin_button;
   GtkWidget *default_action_button;
   GtkWidget *drawing_area;
   GtkWidget *drawing_area_frame;

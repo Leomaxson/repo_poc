@@ -71,6 +71,7 @@ void create_main_window (main_W *main_window){
 
   GtkAccelGroup *accel_group = NULL ;
   GtkTooltips *tooltips;
+  GtkAdjustment * spin_button_adjustment;
   char *psz = NULL ;
 
   tooltips = gtk_tooltips_new ();
@@ -185,11 +186,33 @@ void create_main_window (main_W *main_window){
     NULL,
     NULL) ;
 
-  clocks_combo = qcad_clock_combo_new () ;
+  main_window->combo = clocks_combo = qcad_clock_combo_new () ;
   GTK_WIDGET_UNSET_FLAGS (clocks_combo, GTK_CAN_FOCUS | GTK_CAN_DEFAULT) ;
   gtk_widget_show (clocks_combo) ;
   gtk_table_attach (GTK_TABLE (main_window->clocks_combo_table), clocks_combo, 1, 2, 0, 1, 0, 0, 0, 0) ;
 
+  // Add the spin button used to change the ammount of Bennet's clock zones in 
+  // each methazone.
+  // TODO: Verificar depois o parâmetro "upper" da função abaixo. Deve ser 
+  // definido para o máximo de clocks permitidos em uma mesma metazona.
+  spin_button_adjustment = gtk_adjustment_new((gdouble)4.0, (gdouble)1.0, 
+          (gdouble)20.0, (gdouble)1.0, (gdouble)1.0, (gdouble)1.0);
+  main_window->clocks_count_spin_button = gtk_spin_button_new(
+          spin_button_adjustment, 1, 0);
+  gtk_widget_show(main_window->clocks_count_spin_button);
+  //gtk_container_set_border_width(GTK_CONTAINER(main_window->clocks_count_spin_button), 2);
+  gtk_toolbar_append_element(
+          GTK_TOOLBAR(layers_toolbar),
+          GTK_TOOLBAR_CHILD_WIDGET,
+          main_window->clocks_count_spin_button,
+          "4",  // TODO: Ajustar o texto inicial assim como o valor inicial para 4.
+          _("Number of clock zones."),
+          _("Determines the number of clock zones."),
+          NULL,
+          NULL,
+          NULL);
+
+  
   main_window->bus_layout_button =
   gtk_toolbar_append_element (
     GTK_TOOLBAR (layers_toolbar),
@@ -943,7 +966,7 @@ void create_main_window (main_W *main_window){
   g_signal_connect (G_OBJECT (main_window->bus_layout_menu_item),              "activate", (GCallback)bus_layout_button_clicked,                     NULL);
   g_signal_connect (G_OBJECT (about_menu_item),                                "activate", (GCallback)on_about_menu_item_activate,                   NULL);
   g_signal_connect (G_OBJECT (main_window->main_window),                       "show",     (GCallback)main_window_show,                              NULL);
-
+  g_signal_connect (G_OBJECT (main_window->clocks_count_spin_button),          "value-changed", (GCallback)on_spin_button_value_changed,             NULL);
   g_signal_connect (G_OBJECT (clocks_combo),                                   "changed",  (GCallback)on_clocks_combo_changed,    clocks_combo);
   g_signal_connect_swapped (G_OBJECT (quit_menu_item),                         "activate", (GCallback)on_quit_menu_item_activate, main_window->main_window);
   // attach the necessary signals to the drawing area widget //

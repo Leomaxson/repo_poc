@@ -85,5 +85,6 @@ gboolean configure_event(GtkWidget *widget, GdkEventConfigure *event, gpointer u
 gboolean scroll_event(GtkWidget *widget, GdkEventScroll *event, gpointer user_data) ;
 gboolean expose_event(GtkWidget *widget, GdkEventExpose *event, gpointer user_data);
 gboolean on_quit_menu_item_activate(GtkWidget *main_window, gpointer user_data);
+void on_spin_button_value_changed(GtkWidget *widget, gpointer data);
 
 #endif /* _CALLBACKS_H_*/
