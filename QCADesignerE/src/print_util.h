@@ -46,4 +46,18 @@ FILE *OpenPrintStream (print_OP *pPO) ;
 
 void ClosePrintStream  (FILE *pfile, print_OP *pPO) ;
 
+#include "design.h"
+
+/* Constants */
+#define NUMBER_OF_CLOCKS_DEFAULT     (4)
+
+/* Exported functions */
+void setNumberOfClocks(int nClocks);
+int getNumberOfClocks(void);
+int getNumberOfMetaClocks(void);
+int getNumberOfTotalClocks(void);
+double getParameterB(int clock, int numberOfClocks);
+int numberOfClocksUsed(DESIGN *design);
+void updateNumberOfClocksUsed(DESIGN *design, int oldNumberOfClocks);
+
 #endif /* _PRINT_UTIL_H_ */

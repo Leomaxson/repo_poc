@@ -207,12 +207,12 @@ DIST_SOURCES = $(QCADesigner_SOURCES) $(batch_sim_SOURCES) \
 ETAGS = etags
 CTAGS = ctags
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
-ACLOCAL = ${SHELL} /home/frank/qcae/src/missing --run aclocal-1.11
+ACLOCAL = ${SHELL} /home/leomax/Documents/POC/repo_poc/QCADesignerE/missing --run aclocal-1.11
 AMTAR = $${TAR-tar}
-AUTOCONF = ${SHELL} /home/frank/qcae/src/missing --run autoconf
-AUTOHEADER = ${SHELL} /home/frank/qcae/src/missing --run autoheader
-AUTOMAKE = ${SHELL} /home/frank/qcae/src/missing --run automake-1.11
-AWK = gawk
+AUTOCONF = ${SHELL} /home/leomax/Documents/POC/repo_poc/QCADesignerE/missing --run autoconf
+AUTOHEADER = ${SHELL} /home/leomax/Documents/POC/repo_poc/QCADesignerE/missing --run autoheader
+AUTOMAKE = ${SHELL} /home/leomax/Documents/POC/repo_poc/QCADesignerE/missing --run automake-1.11
+AWK = mawk
 CATALOGS =  de.gmo hu.gmo ro.gmo fr.gmo
 CATOBJEXT = .gmo
 CC = gcc
@@ -222,7 +222,7 @@ CPP = gcc -E
 CPPFLAGS = 
 CYGPATH_W = echo
 DATADIRNAME = share
-DEFS = -DPACKAGE_NAME=\"\" -DPACKAGE_TARNAME=\"\" -DPACKAGE_VERSION=\"\" -DPACKAGE_STRING=\"\" -DPACKAGE_BUGREPORT=\"\" -DPACKAGE_URL=\"\" -DPACKAGE=\"QCADesigner\" -DVERSION=\"2.0.3E\" -DSTDC_HEADERS=1 -DGETTEXT_PACKAGE=\"QCADesigner\" -DPACKAGE_SOURCE_DIR=\"/home/frank/qcae/src\" -DHAVE_SYS_TYPES_H=1 -DHAVE_SYS_STAT_H=1 -DHAVE_STDLIB_H=1 -DHAVE_STRING_H=1 -DHAVE_MEMORY_H=1 -DHAVE_STRINGS_H=1 -DHAVE_INTTYPES_H=1 -DHAVE_STDINT_H=1 -DHAVE_UNISTD_H=1 -DHAVE_LOCALE_H=1 -DHAVE_LC_MESSAGES=1 -DHAVE_BIND_TEXTDOMAIN_CODESET=1 -DHAVE_GETTEXT=1 -DHAVE_DCGETTEXT=1 -DENABLE_NLS=1
+DEFS = -DPACKAGE_NAME=\"\" -DPACKAGE_TARNAME=\"\" -DPACKAGE_VERSION=\"\" -DPACKAGE_STRING=\"\" -DPACKAGE_BUGREPORT=\"\" -DPACKAGE_URL=\"\" -DPACKAGE=\"QCADesigner\" -DVERSION=\"2.0.3E\" -DSTDC_HEADERS=1 -DGETTEXT_PACKAGE=\"QCADesigner\" -DPACKAGE_SOURCE_DIR=\"/home/leomax/Documents/POC/repo_poc/QCADesignerE\" -DHAVE_SYS_TYPES_H=1 -DHAVE_SYS_STAT_H=1 -DHAVE_STDLIB_H=1 -DHAVE_STRING_H=1 -DHAVE_MEMORY_H=1 -DHAVE_STRINGS_H=1 -DHAVE_INTTYPES_H=1 -DHAVE_STDINT_H=1 -DHAVE_UNISTD_H=1 -DHAVE_LOCALE_H=1 -DHAVE_LC_MESSAGES=1 -DHAVE_BIND_TEXTDOMAIN_CODESET=1 -DHAVE_GETTEXT=1 -DHAVE_DCGETTEXT=1 -DENABLE_NLS=1
 DEPDIR = .deps
 ECHO_C = 
 ECHO_N = -n
@@ -230,17 +230,17 @@ ECHO_T =
 EGREP = /bin/grep -E
 EXEEXT = 
 GETTEXT_PACKAGE = QCADesigner
-GLIB_CFLAGS = -I/usr/include/glib-2.0 -I/usr/lib64/glib-2.0/include  
-GLIB_LIBS = -lglib-2.0  
+GLIB_CFLAGS = -I/usr/include/glib-2.0 -I/usr/lib/x86_64-linux-gnu/glib-2.0/include
+GLIB_LIBS = -lglib-2.0
 GMOFILES =  de.gmo hu.gmo ro.gmo fr.gmo
 GMSGFMT = /usr/bin/msgfmt
-GOBJECT_CFLAGS = -pthread -I/usr/include/glib-2.0 -I/usr/lib64/glib-2.0/include  
-GOBJECT_LIBS = -pthread -lgobject-2.0 -lgthread-2.0 -lrt -lglib-2.0  
+GOBJECT_CFLAGS = -I/usr/include/glib-2.0 -I/usr/lib/x86_64-linux-gnu/glib-2.0/include
+GOBJECT_LIBS = -lgobject-2.0 -lglib-2.0
 GREP = /bin/grep
-GTHREAD_CFLAGS = -pthread -I/usr/include/glib-2.0 -I/usr/lib64/glib-2.0/include  
-GTHREAD_LIBS = -pthread -lgthread-2.0 -lrt -lglib-2.0  
-GTK_CFLAGS = -pthread -I/usr/include/gtk-2.0 -I/usr/lib64/gtk-2.0/include -I/usr/include/atk-1.0 -I/usr/include/cairo -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/pango-1.0 -I/usr/include/glib-2.0 -I/usr/lib64/glib-2.0/include -I/usr/include/pixman-1 -I/usr/include/freetype2 -I/usr/include/libpng12   -I/usr/include/cairo -I/usr/include/pixman-1 -I/usr/include/freetype2 -I/usr/include/libpng12  
-GTK_LIBS = -pthread -lgtk-x11-2.0 -lgdk-x11-2.0 -latk-1.0 -lgio-2.0 -lpangoft2-1.0 -lpangocairo-1.0 -lgdk_pixbuf-2.0 -lcairo -lpango-1.0 -lfreetype -lfontconfig -lgobject-2.0 -lgmodule-2.0 -lgthread-2.0 -lrt -lglib-2.0   -lcairo  
+GTHREAD_CFLAGS = -pthread -I/usr/include/glib-2.0 -I/usr/lib/x86_64-linux-gnu/glib-2.0/include
+GTHREAD_LIBS = -lgthread-2.0 -pthread -lglib-2.0
+GTK_CFLAGS = -pthread -I/usr/include/gtk-2.0 -I/usr/lib/x86_64-linux-gnu/gtk-2.0/include -I/usr/include/gio-unix-2.0/ -I/usr/include/cairo -I/usr/include/pango-1.0 -I/usr/include/atk-1.0 -I/usr/include/cairo -I/usr/include/pixman-1 -I/usr/include/libpng12 -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/libpng12 -I/usr/include/pango-1.0 -I/usr/include/harfbuzz -I/usr/include/pango-1.0 -I/usr/include/glib-2.0 -I/usr/lib/x86_64-linux-gnu/glib-2.0/include -I/usr/include/freetype2 -I/usr/include/cairo -I/usr/include/glib-2.0 -I/usr/lib/x86_64-linux-gnu/glib-2.0/include -I/usr/include/pixman-1 -I/usr/include/freetype2 -I/usr/include/libpng12
+GTK_LIBS = -lgtk-x11-2.0 -lgdk-x11-2.0 -lpangocairo-1.0 -latk-1.0 -lcairo -lgdk_pixbuf-2.0 -lgio-2.0 -lpangoft2-1.0 -lpango-1.0 -lgobject-2.0 -lglib-2.0 -lfontconfig -lfreetype -lcairo
 ICON_EXT = _0_48x48x24a.png
 INSTALL = /usr/bin/install -c
 INSTALL_DATA = ${INSTALL} -m 644
@@ -254,7 +254,7 @@ LIBOBJS =
 LIBS = 
 LTLIBOBJS = 
 MAINT = #
-MAKEINFO = ${SHELL} /home/frank/qcae/src/missing --run makeinfo
+MAKEINFO = ${SHELL} /home/leomax/Documents/POC/repo_poc/QCADesignerE/missing --run makeinfo
 MKDIR_P = /bin/mkdir -p
 MKINSTALLDIRS = ./mkinstalldirs
 MSGFMT = /usr/bin/msgfmt
@@ -281,10 +281,10 @@ STRIP =
 USE_NLS = yes
 VERSION = 2.0.3E
 XGETTEXT = /usr/bin/xgettext
-abs_builddir = /home/frank/qcae/src/src
-abs_srcdir = /home/frank/qcae/src/src
-abs_top_builddir = /home/frank/qcae/src
-abs_top_srcdir = /home/frank/qcae/src
+abs_builddir = /home/leomax/Documents/POC/repo_poc/QCADesignerE/src
+abs_srcdir = /home/leomax/Documents/POC/repo_poc/QCADesignerE/src
+abs_top_builddir = /home/leomax/Documents/POC/repo_poc/QCADesignerE
+abs_top_srcdir = /home/leomax/Documents/POC/repo_poc/QCADesignerE
 ac_ct_CC = gcc
 am__include = include
 am__leading_dot = .
@@ -311,7 +311,7 @@ host_vendor = unknown
 htmldir = ${docdir}
 includedir = ${prefix}/include
 infodir = ${datarootdir}/info
-install_sh = ${SHELL} /home/frank/qcae/src/install-sh
+install_sh = ${SHELL} /home/leomax/Documents/POC/repo_poc/QCADesignerE/install-sh
 libdir = ${exec_prefix}/lib
 libexecdir = ${exec_prefix}/libexec
 localedir = ${datarootdir}/locale
@@ -319,7 +319,7 @@ localstatedir = ${prefix}/var
 mandir = ${datarootdir}/man
 mkdir_p = /bin/mkdir -p
 oldincludedir = /usr/include
-packagesrcdir = /home/frank/qcae/src
+packagesrcdir = /home/leomax/Documents/POC/repo_poc/QCADesignerE
 pdfdir = ${docdir}
 prefix = /home/frank/qcae
 program_transform_name = s,x,x,
@@ -361,8 +361,8 @@ QCADesigner_CFLAGS = \
 	-DDESIGNER \
 	-DPACKAGE_DATA_DIR=\""$(datadir)"\" \
 	-DPACKAGE_LOCALE_DIR=\""$(prefix)/$(DATADIRNAME)/locale"\" \
-	-pthread -I/usr/include/gtk-2.0 -I/usr/lib64/gtk-2.0/include -I/usr/include/atk-1.0 -I/usr/include/cairo -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/pango-1.0 -I/usr/include/glib-2.0 -I/usr/lib64/glib-2.0/include -I/usr/include/pixman-1 -I/usr/include/freetype2 -I/usr/include/libpng12   -I/usr/include/cairo -I/usr/include/pixman-1 -I/usr/include/freetype2 -I/usr/include/libpng12   \
-	-pthread -I/usr/include/glib-2.0 -I/usr/lib64/glib-2.0/include  
+	-pthread -I/usr/include/gtk-2.0 -I/usr/lib/x86_64-linux-gnu/gtk-2.0/include -I/usr/include/gio-unix-2.0/ -I/usr/include/cairo -I/usr/include/pango-1.0 -I/usr/include/atk-1.0 -I/usr/include/cairo -I/usr/include/pixman-1 -I/usr/include/libpng12 -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/libpng12 -I/usr/include/pango-1.0 -I/usr/include/harfbuzz -I/usr/include/pango-1.0 -I/usr/include/glib-2.0 -I/usr/lib/x86_64-linux-gnu/glib-2.0/include -I/usr/include/freetype2 -I/usr/include/cairo -I/usr/include/glib-2.0 -I/usr/lib/x86_64-linux-gnu/glib-2.0/include -I/usr/include/pixman-1 -I/usr/include/freetype2 -I/usr/include/libpng12 \
+	-pthread -I/usr/include/glib-2.0 -I/usr/lib/x86_64-linux-gnu/glib-2.0/include
 
 QCADesigner_SOURCES = \
 	$(UNDO_REDO_FILES) \
@@ -445,9 +445,9 @@ QCADesigner_SOURCES = \
 #
 QCADesigner_LDADD = \
 	-lm \
-	-pthread -lgtk-x11-2.0 -lgdk-x11-2.0 -latk-1.0 -lgio-2.0 -lpangoft2-1.0 -lpangocairo-1.0 -lgdk_pixbuf-2.0 -lcairo -lpango-1.0 -lfreetype -lfontconfig -lgobject-2.0 -lgmodule-2.0 -lgthread-2.0 -lrt -lglib-2.0   -lcairo   \
+	-lgtk-x11-2.0 -lgdk-x11-2.0 -lpangocairo-1.0 -latk-1.0 -lcairo -lgdk_pixbuf-2.0 -lgio-2.0 -lpangoft2-1.0 -lpango-1.0 -lgobject-2.0 -lglib-2.0 -lfontconfig -lfreetype -lcairo \
 	$(INTLLIBS) \
-	-pthread -lgthread-2.0 -lrt -lglib-2.0   
+	-lgthread-2.0 -pthread -lglib-2.0 
 
 
 #################### batch_sim ######################
@@ -455,8 +455,8 @@ batch_sim_CFLAGS = \
 	-DSTDIO_FILEIO \
 	-DPACKAGE_DATA_DIR=\""$(datadir)"\" \
 	-DPACKAGE_LOCALE_DIR=\""$(prefix)/$(DATADIRNAME)/locale"\" \
-	-I/usr/include/glib-2.0 -I/usr/lib64/glib-2.0/include   \
-	-pthread -I/usr/include/glib-2.0 -I/usr/lib64/glib-2.0/include  
+	-I/usr/include/glib-2.0 -I/usr/lib/x86_64-linux-gnu/glib-2.0/include \
+	-I/usr/include/glib-2.0 -I/usr/lib/x86_64-linux-gnu/glib-2.0/include
 
 batch_sim_SOURCES = \
 	$(STDIO_FILEIO_FILES) \
@@ -500,8 +500,8 @@ batch_sim_SOURCES = \
 #
 batch_sim_LDADD = \
 	-lm \
-	-lglib-2.0   \
-	-pthread -lgobject-2.0 -lgthread-2.0 -lrt -lglib-2.0  
+	-lglib-2.0 \
+	-lgobject-2.0 -lglib-2.0
 
 
 #################### graph_dialog ###################
@@ -510,8 +510,8 @@ graph_dialog_CFLAGS = \
 	-DGTK_GUI \
 	-DPACKAGE_DATA_DIR=\""$(datadir)"\" \
 	-DPACKAGE_LOCALE_DIR=\""$(prefix)/$(DATADIRNAME)/locale"\" \
-	-pthread -I/usr/include/gtk-2.0 -I/usr/lib64/gtk-2.0/include -I/usr/include/atk-1.0 -I/usr/include/cairo -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/pango-1.0 -I/usr/include/glib-2.0 -I/usr/lib64/glib-2.0/include -I/usr/include/pixman-1 -I/usr/include/freetype2 -I/usr/include/libpng12   -I/usr/include/cairo -I/usr/include/pixman-1 -I/usr/include/freetype2 -I/usr/include/libpng12   \
-	-pthread -I/usr/include/glib-2.0 -I/usr/lib64/glib-2.0/include  
+	-pthread -I/usr/include/gtk-2.0 -I/usr/lib/x86_64-linux-gnu/gtk-2.0/include -I/usr/include/gio-unix-2.0/ -I/usr/include/cairo -I/usr/include/pango-1.0 -I/usr/include/atk-1.0 -I/usr/include/cairo -I/usr/include/pixman-1 -I/usr/include/libpng12 -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/libpng12 -I/usr/include/pango-1.0 -I/usr/include/harfbuzz -I/usr/include/pango-1.0 -I/usr/include/glib-2.0 -I/usr/lib/x86_64-linux-gnu/glib-2.0/include -I/usr/include/freetype2 -I/usr/include/cairo -I/usr/include/glib-2.0 -I/usr/lib/x86_64-linux-gnu/glib-2.0/include -I/usr/include/pixman-1 -I/usr/include/freetype2 -I/usr/include/libpng12 \
+	-pthread -I/usr/include/glib-2.0 -I/usr/lib/x86_64-linux-gnu/glib-2.0/include
 
 graph_dialog_SOURCES = \
 	$(STDIO_FILEIO_FILES) \
@@ -548,9 +548,9 @@ graph_dialog_SOURCES = \
 
 graph_dialog_LDADD = \
 	-lm \
-	-pthread -lgtk-x11-2.0 -lgdk-x11-2.0 -latk-1.0 -lgio-2.0 -lpangoft2-1.0 -lpangocairo-1.0 -lgdk_pixbuf-2.0 -lcairo -lpango-1.0 -lfreetype -lfontconfig -lgobject-2.0 -lgmodule-2.0 -lgthread-2.0 -lrt -lglib-2.0   -lcairo   \
+	-lgtk-x11-2.0 -lgdk-x11-2.0 -lpangocairo-1.0 -latk-1.0 -lcairo -lgdk_pixbuf-2.0 -lgio-2.0 -lpangoft2-1.0 -lpango-1.0 -lgobject-2.0 -lglib-2.0 -lfontconfig -lfreetype -lcairo \
 	$(INTLLIBS) \
-	-pthread -lgthread-2.0 -lrt -lglib-2.0   
+	-lgthread-2.0 -pthread -lglib-2.0 
 
 all: all-am
 
