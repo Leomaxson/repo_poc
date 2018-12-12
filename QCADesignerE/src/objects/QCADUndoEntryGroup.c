@@ -30,6 +30,14 @@
 
 // MAKE SURE TO SKIP OVER GList items containting NULL data !
 
+#include <inttypes.h>
+#include <stdint.h>
+#if UINTPTR_MAX!=4294967295U
+#define PTRDISPLAYWIDTH "16"
+#else
+#define PTRDISPLAYWIDTH "8"
+#endif
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -227,17 +235,17 @@ void qcad_undo_entry_group_dump (QCADUndoEntryGroup *entry_group, FILE *pfile, i
   {
   GList *llItr = NULL ;
 
-  fprintf (pfile, "%*scurrent_child = 0x%08X\n", icIndent, " ", (int)(entry_group->current_group)) ;
-  fprintf (pfile, "%*s|0x%08X|->\n", icIndent, " ", (int)(entry_group->llBeg)) ;
+  fprintf (pfile, "%*scurrent_child = 0x%0" PTRDISPLAYWIDTH PRIXPTR "\n", icIndent, " ", (uintptr_t)(entry_group->current_group)) ;
+  fprintf (pfile, "%*s|0x%0" PTRDISPLAYWIDTH PRIXPTR "|->\n", icIndent, " ", (uintptr_t)(entry_group->llBeg)) ;
   for (llItr = entry_group->llBeg ; NULL != llItr ; llItr = llItr->next)
     {
-    fprintf (pfile, "%*s<-|0x%08X|0x%08X|0x%08X|->", icIndent, " ", (int)(llItr->prev), (int)(llItr->data), (int)(llItr->next)) ;
+    fprintf (pfile, "%*s<-|0x%0" PTRDISPLAYWIDTH PRIXPTR "|0x%0" PTRDISPLAYWIDTH PRIXPTR "|0x%0" PTRDISPLAYWIDTH PRIXPTR "|->", icIndent, " ", (uintptr_t)(llItr->prev), (uintptr_t)(llItr->data), (uintptr_t)(llItr->next)) ;
     fprintf (pfile, "%s\n", (entry_group->llCur == llItr) ? "llCur" : "") ;
     if (NULL != llItr->data)
       if (QCAD_IS_UNDO_ENTRY_GROUP (llItr->data))
         qcad_undo_entry_group_dump (QCAD_UNDO_ENTRY_GROUP (llItr->data), pfile, icIndent + 2) ;
     }
-  fprintf (pfile, "%*s<-|0x%08X|\n", icIndent, " ", (int)(entry_group->llEnd)) ;
+  fprintf (pfile, "%*s<-|0x%0" PTRDISPLAYWIDTH PRIXPTR "|\n", icIndent, " ", (uintptr_t)(entry_group->llEnd)) ;
   }
 
 ///////////////////////////////////////////////////////////////////////////////
