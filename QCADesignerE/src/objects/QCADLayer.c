@@ -28,6 +28,14 @@
 //                                                      //
 //////////////////////////////////////////////////////////
 
+#include <inttypes.h>
+#include <stdint.h>
+#if UINTPTR_MAX!=4294967295U
+#define PTRDISPLAYWIDTH "16"
+#else
+#define PTRDISPLAYWIDTH "8"
+#endif
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -198,7 +206,7 @@ static void qcad_layer_instance_finalize (GObject *object)
     llNext = llItr->next ;
     if (NULL != llItr->data)
       {
-      DBG_REFS (fprintf (stderr, "QCADLayer::instance_finalize:unref-ing object 0x%08X\n", (int)(llItr->data))) ;
+      DBG_REFS (fprintf (stderr, "QCADLayer::instance_finalize:unref-ing object 0x%0" PTRDISPLAYWIDTH PRIXPTR "\n", (int)(llItr->data))) ;
       g_object_unref (G_OBJECT (llItr->data)) ;
       }
     llItr = llNext ;
@@ -238,7 +246,7 @@ static gboolean qcad_layer_do_container_add (QCADDOContainer *container, QCADDes
       // If we're re-adding the object to its layer, then we merely simulate its (de)selection
       if (NULL != ots->layer)
         {
-        DBG_REFS (fprintf (stderr, "qcad_layer_add_object:refin-inf object 0x%08X so as to re-add to layer\n", (int)obj)) ;
+        DBG_REFS (fprintf (stderr, "qcad_layer_add_object:refin-inf object 0x%0" PTRDISPLAYWIDTH PRIXPTR " so as to re-add to layer\n", (int)obj)) ;
         g_object_ref (G_OBJECT (obj)) ;
         if (NULL != ots->llDeSel)
           ots->llDeSel->data = obj ;
@@ -344,7 +352,7 @@ static void qcad_layer_track_new_object (QCADLayer *layer, QCADDesignObject *obj
     g_object_remove_weak_pointer (G_OBJECT (ots->layer), (gpointer *)&(ots->layer)) ;
   ots->layer = layer ;
   ots->parent = parent ;
-  DBG_REFS (fprintf (stderr, "Ref-ing object 0x%08X so as to newly add it to layer 0x%08X\n", (int)obj, (int)layer)) ;
+  DBG_REFS (fprintf (stderr, "Ref-ing object 0x%0" PTRDISPLAYWIDTH PRIXPTR " so as to newly add it to layer 0x%0" PTRDISPLAYWIDTH PRIXPTR "\n", (int)obj, (int)layer)) ;
   g_object_ref (G_OBJECT (obj)) ;
   g_object_add_weak_pointer (G_OBJECT (layer), (gpointer *)&(ots->layer)) ;
 
@@ -373,7 +381,7 @@ static gboolean qcad_layer_do_container_remove (QCADDOContainer *container, QCAD
       ots->llSel = NULL ;
       }
 
-  DBG_REFS (fprintf (stderr, "qcad_layer_remove_object:Finally, unref-ing object 0x%08X\n", (int)obj)) ;
+  DBG_REFS (fprintf (stderr, "qcad_layer_remove_object:Finally, unref-ing object 0x%0" PTRDISPLAYWIDTH PRIXPTR "\n", (int)obj)) ;
   g_object_unref (G_OBJECT (obj)) ;
 
   return TRUE ;
@@ -548,13 +556,13 @@ void qcad_layer_dump (QCADLayer *layer, FILE *pfile)
   {
   GList *lstSelObj = NULL, *lstObj = NULL ;
 
-  fprintf (pfile, "Layer \"%s\"(0x%08X):\n", layer->pszDescription, (int)layer) ;
+  fprintf (pfile, "Layer \"%s\"(0x%0" PTRDISPLAYWIDTH PRIXPTR "):\n", layer->pszDescription, (uintptr_t)layer) ;
 #ifdef GTK_GUI
-  fprintf (pfile, "combo_item = 0x%08X\n", (int)(layer->combo_item)) ;
+  fprintf (pfile, "combo_item = 0x%0" PTRDISPLAYWIDTH PRIXPTR "\n", (uintptr_t)(layer->combo_item)) ;
 #endif /* def GTK_GUI */
   if (NULL != layer->lstObjs)
     {
-    fprintf (stderr, "lstObjs:|0x%08X|->", (int)(layer->lstObjs)) ;
+    fprintf (stderr, "lstObjs:|0x%0" PTRDISPLAYWIDTH PRIXPTR "|->", (uintptr_t)(layer->lstObjs)) ;
     for (lstObj = layer->lstObjs ; lstObj != NULL ; lstObj = lstObj->next)
       {
       if (LAYER_TYPE_CELLS == layer->type)
@@ -562,41 +570,41 @@ void qcad_layer_dump (QCADLayer *layer, FILE *pfile)
         if (NULL != lstObj->data)
           {
           if (NULL != lstObj->next)
-            fprintf (pfile, "|[%.2lf,%.2lf]|0x%08X|->", QCAD_DESIGN_OBJECT (lstObj->data)->x, QCAD_DESIGN_OBJECT (lstObj->data)->y, (int)(lstObj->next)) ;
+            fprintf (pfile, "|[%.2lf,%.2lf]|0x%0" PTRDISPLAYWIDTH PRIXPTR "|->", QCAD_DESIGN_OBJECT (lstObj->data)->x, QCAD_DESIGN_OBJECT (lstObj->data)->y, (uintptr_t)(lstObj->next)) ;
           else
-            fprintf (pfile, "|[%.2lf,%.2lf]|0x%08X|\n", QCAD_DESIGN_OBJECT (lstObj->data)->x, QCAD_DESIGN_OBJECT (lstObj->data)->y, (int)(lstObj->next)) ;
+            fprintf (pfile, "|[%.2lf,%.2lf]|0x%0" PTRDISPLAYWIDTH PRIXPTR "|\n", QCAD_DESIGN_OBJECT (lstObj->data)->x, QCAD_DESIGN_OBJECT (lstObj->data)->y, (uintptr_t)(lstObj->next)) ;
           }
         else
           {
           if (NULL != lstObj->next)
-            fprintf (pfile, "|0x%08X|0x%08X|->", (int)(lstObj->data), (int)(lstObj->next)) ;
+            fprintf (pfile, "|0x%0" PTRDISPLAYWIDTH PRIXPTR "|0x%0" PTRDISPLAYWIDTH PRIXPTR "|->", (uintptr_t)(lstObj->data), (uintptr_t)(lstObj->next)) ;
           else
-            fprintf (pfile, "|0x%08X|0x%08X|\n", (int)(lstObj->data), (int)(lstObj->next)) ;
+            fprintf (pfile, "|0x%0" PTRDISPLAYWIDTH PRIXPTR "|0x%0" PTRDISPLAYWIDTH PRIXPTR "|\n", (uintptr_t)(lstObj->data), (uintptr_t)(lstObj->next)) ;
           }
         }
       else
         {
         if (NULL != lstObj->next)
-          fprintf (pfile, "|0x%08X|0x%08X|->", (int)(lstObj->data), (int)(lstObj->next)) ;
+          fprintf (pfile, "|0x%0" PTRDISPLAYWIDTH PRIXPTR "|0x%0" PTRDISPLAYWIDTH PRIXPTR "|->", (uintptr_t)(lstObj->data), (uintptr_t)(lstObj->next)) ;
         else
-          fprintf (pfile, "|0x%08X|0x%08X|\n", (int)(lstObj->data), (int)(lstObj->next)) ;
+          fprintf (pfile, "|0x%0" PTRDISPLAYWIDTH PRIXPTR "|0x%0" PTRDISPLAYWIDTH PRIXPTR "|\n", (uintptr_t)(lstObj->data), (uintptr_t)(lstObj->next)) ;
         }
       }
     }
   else
-    fprintf (stderr, "lstObjs:|0x%08X|\n", (int)(layer->lstObjs)) ;
+    fprintf (stderr, "lstObjs:|0x%0" PTRDISPLAYWIDTH PRIXPTR "|\n", (uintptr_t)(layer->lstObjs)) ;
 
   if (NULL == layer->lstSelObjs)
-    fprintf (stderr, "lstSelObjs:|0x%08X|\n", (int)(layer->lstSelObjs)) ;
+    fprintf (stderr, "lstSelObjs:|0x%0" PTRDISPLAYWIDTH PRIXPTR "|\n", (uintptr_t)(layer->lstSelObjs)) ;
   else
     {
-    fprintf (stderr, "lstSelObjs:|0x%08X|->", (int)(layer->lstSelObjs)) ;
+    fprintf (stderr, "lstSelObjs:|0x%0" PTRDISPLAYWIDTH PRIXPTR "|->", (uintptr_t)(layer->lstSelObjs)) ;
     for (lstSelObj = layer->lstSelObjs ; lstSelObj != NULL ; lstSelObj = lstSelObj->next)
       {
 	    if (NULL != lstSelObj->next)
-        fprintf (pfile, "|0x%08X|0x%08X|->", (int)(lstSelObj->data), (int)(lstSelObj->next)) ;
+        fprintf (pfile, "|0x%0" PTRDISPLAYWIDTH PRIXPTR "|0x%0" PTRDISPLAYWIDTH PRIXPTR "|->", (uintptr_t)(lstSelObj->data), (uintptr_t)(lstSelObj->next)) ;
       else
-        fprintf (pfile, "|0x%08X|0x%08X|\n", (int)(lstSelObj->data), (int)(lstSelObj->next)) ;
+        fprintf (pfile, "|0x%0" PTRDISPLAYWIDTH PRIXPTR "|0x%0" PTRDISPLAYWIDTH PRIXPTR "|\n", (uintptr_t)(lstSelObj->data), (uintptr_t)(lstSelObj->next)) ;
       }
     }
   }
@@ -632,7 +640,7 @@ void qcad_layer_selection_create_from_selection (QCADLayer *layer)
     if (NULL != (obj = qcad_design_object_new_from_object (QCAD_DESIGN_OBJECT (llItr->data))))
       {
       qcad_layer_do_container_add (QCAD_DO_CONTAINER (layer), obj) ;
-      DBG_REFS (fprintf (stderr, "qcad_layer_selection_create_from_selection:Added object 0x%08X to layer 0x%08X, so unref-ing it\n", (int)obj, (int)layer)) ;
+      DBG_REFS (fprintf (stderr, "qcad_layer_selection_create_from_selection:Added object 0x%0" PTRDISPLAYWIDTH PRIXPTR " to layer 0x%0" PTRDISPLAYWIDTH PRIXPTR ", so unref-ing it\n", (int)obj, (int)layer)) ;
       g_object_unref (obj) ;
       }
 
@@ -843,7 +851,7 @@ static gboolean unserialize (QCADDesignObject *obj, FILE *pfile)
       if (NULL != (obj = qcad_design_object_new_from_stream (pfile)))
         {
         qcad_layer_do_container_add (QCAD_DO_CONTAINER (layer), obj) ;
-        DBG_REFS (fprintf (stderr, "QCADLayer::unserialize:After adding object 0x%08X to layer 0x%08X, unref-ing object\n", (int)obj, (int)layer)) ;
+        DBG_REFS (fprintf (stderr, "QCADLayer::unserialize:After adding object 0x%0" PTRDISPLAYWIDTH PRIXPTR " to layer 0x%0" PTRDISPLAYWIDTH PRIXPTR ", unref-ing object\n", (int)obj, (int)layer)) ;
         g_object_unref (G_OBJECT (obj)) ;
         if (!(iShowProgress = (iShowProgress + 1) % 1000))
           set_progress_bar_fraction (get_file_percent (pfile)) ;
