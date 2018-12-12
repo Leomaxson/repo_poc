@@ -490,7 +490,7 @@ static GtkWidget *create_trace_drawing_area (GRAPH_DATA *graph_data, GDestroyNot
   {
   GtkWidget *trace_drawing_widget = gtk_drawing_area_new () ;
   gtk_widget_add_events (trace_drawing_widget, GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK) ;
-  set_widget_background_colour (trace_drawing_widget, 30000, 30000, 30000) ;
+  set_widget_background_colour (trace_drawing_widget, 0, 0, 0) ;
   g_object_set_data_full (G_OBJECT (trace_drawing_widget), "graph_data", graph_data, (GDestroyNotify)graph_data_free) ;
   gtk_widget_set_size_request (trace_drawing_widget, -1, TRACE_MIN_CY) ;
   gtk_widget_add_events (trace_drawing_widget,
