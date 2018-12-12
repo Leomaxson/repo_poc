@@ -29,12 +29,14 @@
 //                                                      //
 //////////////////////////////////////////////////////////
 
+#include <stdio.h>
 #include <string.h>
 #include <glib-object.h>
 #include <gdk/gdk.h>
 #include "objects_debug.h"
 #include "support.h"
 #include "QCADClockCombo.h"
+#include "../util.h"
 
 static void qcad_clock_combo_class_init (GObjectClass *klass, gpointer data) ;
 static void qcad_clock_combo_instance_init (GObject *object, gpointer data) ;
@@ -86,6 +88,8 @@ static void qcad_clock_combo_class_init (GObjectClass *klass, gpointer data)
 
 static void qcad_clock_combo_instance_init (GObject *object, gpointer data)
   {
+  int Nix,Njx;
+  char buf[60];
   GtkWidget *item = NULL, *mnu = NULL ;
   QCADClockCombo *qcc = QCAD_CLOCK_COMBO (object) ;
   DBG_OO (fprintf (stderr, "QCADClockCombo::instance_init:Entering\n")) ;
@@ -99,29 +103,16 @@ static void qcad_clock_combo_instance_init (GObject *object, gpointer data)
   gtk_widget_show (mnu) ;
   gtk_option_menu_set_menu (GTK_OPTION_MENU (qcc->widget), mnu) ;
 
-  item = gtk_menu_item_new_with_label (_("Clock 0")) ;
+  for(Njx = 0; Njx < getNumberOfMetaClocks(); Njx++) {
+    for(Nix = 0; Nix < getNumberOfClocks(); Nix++) {
+      snprintf(buf, sizeof(buf), _("Clock %d - (metazone %d)"), Nix, Njx);
+      item = gtk_menu_item_new_with_label (buf) ;
   gtk_widget_show (item) ;
   gtk_container_add (GTK_CONTAINER (mnu), item) ;
-  g_object_set_data (G_OBJECT (item), "clock", (gpointer)0) ;
+      g_object_set_data (G_OBJECT (item), "clock", (gpointer)(getNumberOfClocks() * Njx + Nix)) ;
   g_signal_connect (G_OBJECT (item), "activate", (GCallback)qcad_clock_combo_item_activate, qcc) ;
-
-  item = gtk_menu_item_new_with_label (_("Clock 1")) ;
-  gtk_widget_show (item) ;
-  gtk_container_add (GTK_CONTAINER (mnu), item) ;
-  g_object_set_data (G_OBJECT (item), "clock", (gpointer)1) ;
-  g_signal_connect (G_OBJECT (item), "activate", (GCallback)qcad_clock_combo_item_activate, qcc) ;
-
-  item = gtk_menu_item_new_with_label (_("Clock 2")) ;
-  gtk_widget_show (item) ;
-  gtk_container_add (GTK_CONTAINER (mnu), item) ;
-  g_object_set_data (G_OBJECT (item), "clock", (gpointer)2) ;
-  g_signal_connect (G_OBJECT (item), "activate", (GCallback)qcad_clock_combo_item_activate, qcc) ;
-
-  item = gtk_menu_item_new_with_label (_("Clock 3")) ;
-  gtk_widget_show (item) ;
-  gtk_container_add (GTK_CONTAINER (mnu), item) ;
-  g_object_set_data (G_OBJECT (item), "clock", (gpointer)3) ;
-  g_signal_connect (G_OBJECT (item), "activate", (GCallback)qcad_clock_combo_item_activate, qcc) ;
+    }
+  }
 
   gtk_option_menu_set_history (GTK_OPTION_MENU (qcc->widget), 0) ;
   DBG_OO (fprintf (stderr, "QCADClockCombo::instance_init:Leaving\n")) ;
@@ -137,7 +128,7 @@ int qcad_clock_combo_get_clock (QCADClockCombo *qcc)
 
 void qcad_clock_combo_set_clock (QCADClockCombo *qcc, int clock)
   {
-  g_object_set_data (G_OBJECT (qcc->widget), "clock", (gpointer)(clock = CLAMP (clock, 0, 3))) ;
+  g_object_set_data (G_OBJECT (qcc->widget), "clock", (gpointer)(clock)) ;
   gtk_option_menu_set_history (GTK_OPTION_MENU (qcc->widget), clock) ;
   }
 

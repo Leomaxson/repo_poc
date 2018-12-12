@@ -29,6 +29,7 @@
 #ifndef _OBJECTS_QCADCell_H_
 #define _OBJECTS_QCADCell_H_
 
+#include <stdint.h>
 #include <glib-object.h>
 #include "../gdk_structs.h"
 #include "../exp_array.h"
@@ -41,8 +42,14 @@
 extern "C" {
 #endif /* __cplusplus */
 
-#define CLOCK_INC(c) (((c)+1)%4)
-#define CLOCK_DEC(c) (0==(c)?3:(c)-1)
+// TODO: These two macros need to be changed to make incremending, decrementing
+// and undo/redo work correctly for Bennett clocking.
+#define CLOCK_INC(c,cMax) (((c)+1)%(cMax))
+#define CLOCK_DEC(c,cMax) (0==(c)?((cMax)-1):(c)-1)
+
+//Mod By Sardinha
+#define MAX_CLOCK_RELAX 255
+//EndMod
 
 typedef enum
   {
@@ -55,6 +62,9 @@ typedef enum
   {
   QCAD_CELL_NORMAL,
   QCAD_CELL_INPUT,
+//Sardinha
+  QCAD_CELL_NULL,
+//EndMod
   QCAD_CELL_OUTPUT,
   QCAD_CELL_FIXED,
   QCAD_CELL_LAST_FUNCTION
@@ -66,6 +76,14 @@ typedef struct
   double cyCell ;
   double dot_diameter ;
   int clock ;
+// Modification by Luiz Sardinha on 2012 Jun 14
+  int relax_in;     	// Number of clock cycles 'til the cell will have to retain its relax state.
+  int relax_in_count; 	// Count to relax_in, when the relax state will retain.
+  int relax_cycles; 	// Number of clock cycles that the cell will retain the relax state.
+  int relax_count;  	// Number of clock cycles that the cell is retaining the relax state.
+  gboolean already_low;
+  int old_mode ;
+// End Modification
   int mode ;
   gboolean ignore_energy; // ignore energy dissipation
   } QCADCellOptions ;
@@ -92,9 +110,10 @@ typedef struct
 typedef struct
   {
   QCADDesignObject parent_instance ;
-  int id ;
+  uintptr_t id ;
   QCADCellOptions cell_options ;
   QCADCellFunction cell_function ;
+  QCADCellFunction old_cell_function ;
   void *cell_model ;
   QCADCellDot *cell_dots ;
   int number_of_dots ;
