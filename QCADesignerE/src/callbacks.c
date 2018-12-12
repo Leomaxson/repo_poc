@@ -690,7 +690,7 @@ void on_clock_increment_menu_item_activate(GtkMenuItem * menuitem, gpointer user
        if (NULL != lstItrSel->data)
          {
          project_options.bDesignAltered = bFoundSelection = TRUE ;
-         qcad_cell_set_clock (QCAD_CELL (lstItrSel->data), CLOCK_INC (QCAD_CELL (lstItrSel->data)->cell_options.clock)) ;
+         qcad_cell_set_clock (QCAD_CELL (lstItrSel->data), CLOCK_INC (QCAD_CELL (lstItrSel->data)->cell_options.clock,getNumberOfTotalClocks())) ;
          }
 
   if (bFoundSelection)
@@ -2088,6 +2088,8 @@ static void reflect_layer_status (QCADLayer *layer)
     gtk_widget_set_sensitive (main_window.rotate_cell_button, bSensitive) ;
     gtk_widget_show (main_window.clocks_combo_table) ;
     gtk_widget_set_sensitive (main_window.clocks_combo_table, bSensitive) ;
+    gtk_widget_show (main_window.clocks_count_spin_button) ;
+    gtk_widget_set_sensitive (main_window.clocks_count_spin_button, bSensitive) ;
     }
   else
   if (LAYER_TYPE_CLOCKING == layer->type)
@@ -2100,6 +2102,7 @@ static void reflect_layer_status (QCADLayer *layer)
     gtk_widget_hide (main_window.toggle_alt_display_button) ;
     gtk_widget_hide (main_window.rotate_cell_button) ;
     gtk_widget_hide (main_window.clocks_combo_table) ;
+    gtk_widget_hide (main_window.clocks_count_spin_button) ;
     }
   else
   if (LAYER_TYPE_SUBSTRATE == layer->type)
@@ -2111,6 +2114,7 @@ static void reflect_layer_status (QCADLayer *layer)
     gtk_widget_hide (main_window.toggle_alt_display_button) ;
     gtk_widget_hide (main_window.rotate_cell_button) ;
     gtk_widget_hide (main_window.clocks_combo_table) ;
+    gtk_widget_hide (main_window.clocks_count_spin_button) ;
 
     gtk_widget_show (main_window.substrate_button) ;
     gtk_widget_set_sensitive (main_window.substrate_button, bSensitive) ;
@@ -2125,6 +2129,8 @@ static void reflect_layer_status (QCADLayer *layer)
     gtk_widget_hide (main_window.toggle_alt_display_button) ;
     gtk_widget_hide (main_window.rotate_cell_button) ;
     gtk_widget_hide (main_window.clocks_combo_table) ;
+    gtk_widget_hide (main_window.clocks_count_spin_button) ;
+    
 
     gtk_widget_show (main_window.label_button) ;
     gtk_widget_set_sensitive (main_window.label_button, bSensitive) ;
