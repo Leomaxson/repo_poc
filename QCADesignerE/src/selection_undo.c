@@ -355,11 +355,11 @@ static void undo_sel_apply (QCADUndoEntry *entry, gboolean bUndo, gpointer data)
             g_object_set (G_OBJECT (obj), "clock",
               (bUndo
                 ? (pusc->relative_clock_change > 0
-                  ? (CLOCK_DEC (clock_current))
-                  : (CLOCK_INC (clock_current)))
+                  ? (CLOCK_DEC (clock_current,getNumberOfTotalClocks()))
+                  : (CLOCK_INC (clock_current,getNumberOfTotalClocks())))
                 : (pusc->relative_clock_change > 0
-                  ? (CLOCK_INC (clock_current))
-                  : (CLOCK_DEC (clock_current)))), NULL) ;
+                  ? (CLOCK_INC (clock_current,getNumberOfTotalClocks()))
+                  : (CLOCK_DEC (clock_current,getNumberOfTotalClocks())))), NULL) ;
             }
       break ;
       }
