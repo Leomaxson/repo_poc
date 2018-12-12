@@ -67,4 +67,3 @@ References
 [4]	C. S. Lent, L. Mo, and L. Yuhui, "Bennett clocking of quantum-dot cellular automata and the limits to binary logic scaling," Nanotechnology, vol. 17, p. 4240, 2006.
 
 [5]	J. Timler and C. S. Lent, "Maxwell's demon and quantum-dot cellular automata," Journal of Applied Physics, vol. 94, pp. 1050-1060, 2003.
-
