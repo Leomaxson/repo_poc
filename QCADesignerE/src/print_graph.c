@@ -288,7 +288,7 @@ static void SimDataToPageData (print_graph_OP *pPO, PAGES *pPages, PRINT_GRAPH_D
       if (print_graph_data->sim_data->trace[Nix + print_graph_data->bus_layout->inputs->icUsed].drawtrace)
         icVisibleTraces++ ;
   // Count clocks
-  for (Nix = 0 ; Nix < 4 ; Nix++)
+  for (Nix = 0 ; Nix < print_graph_data->sim_data->number_of_zones ; Nix++)
     if (print_graph_data->sim_data->clock_data[Nix].drawtrace)
       icVisibleTraces++ ;
 
@@ -324,7 +324,7 @@ static void SimDataToPageData (print_graph_OP *pPO, PAGES *pPages, PRINT_GRAPH_D
       if ((trace = &(print_graph_data->sim_data->trace[Nix + print_graph_data->bus_layout->inputs->icUsed]))->drawtrace)
         PlaceSingleTrace (pPO, pPages, trace, ++idxTraceOnPg, icVisibleTraces, dcxEffective, dcyEffective, dcyTrace, print_graph_data->sim_data->number_samples, -1.0, 1.0) ;
   // Place clocks
-  for (Nix = 0 ; Nix < 4 ; Nix++)
+  for (Nix = 0 ; Nix < print_graph_data->sim_data->number_of_zones ; Nix++)
     if ((trace = &print_graph_data->sim_data->clock_data[Nix])->drawtrace)
       {
       tracedata_get_min_max (trace, 0, print_graph_data->sim_data->number_samples - 1, &dTraceMinVal, &dTraceMaxVal) ;
