@@ -573,7 +573,9 @@ QCADesigner-coherence_vector_properties_dialog.o: \
  /usr/include/x86_64-linux-gnu/bits/mathdef.h \
  /usr/include/x86_64-linux-gnu/bits/mathcalls.h \
  /usr/include/x86_64-linux-gnu/bits/mathinline.h /usr/include/assert.h \
- vector_table.h objects/QCADCell.h objects/../gdk_structs.h \
+ vector_table.h objects/QCADCell.h \
+ /usr/lib/gcc/x86_64-linux-gnu/5/include/stdint.h /usr/include/stdint.h \
+ /usr/include/x86_64-linux-gnu/bits/wchar.h objects/../gdk_structs.h \
  objects/../exp_array.h objects/QCADDesignObject.h \
  objects/mouse_handler_struct.h objects/object_helpers.h \
  objects/../hsl2rgb.h objects/QCADUndoEntry.h objects/QCADLabel.h \
@@ -1879,6 +1881,12 @@ coherence_vector.h:
 vector_table.h:
 
 objects/QCADCell.h:
+
+/usr/lib/gcc/x86_64-linux-gnu/5/include/stdint.h:
+
+/usr/include/stdint.h:
+
+/usr/include/x86_64-linux-gnu/bits/wchar.h:
 
 objects/../gdk_structs.h:
 

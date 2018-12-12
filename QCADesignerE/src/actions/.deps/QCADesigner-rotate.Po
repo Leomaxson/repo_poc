@@ -557,8 +557,11 @@ actions/QCADesigner-rotate.o: actions/rotate.c /usr/include/stdc-predef.h \
  /usr/include/gtk-2.0/gtk/gtktipsquery.h actions/rotate.h \
  actions/../global_consts.h actions/../design.h actions/../exp_array.h \
  actions/../objects/object_helpers.h actions/../objects/../hsl2rgb.h \
- actions/../objects/QCADCell.h actions/../objects/../gdk_structs.h \
- actions/../objects/../exp_array.h actions/../objects/QCADDesignObject.h \
+ actions/../objects/QCADCell.h \
+ /usr/lib/gcc/x86_64-linux-gnu/5/include/stdint.h /usr/include/stdint.h \
+ /usr/include/x86_64-linux-gnu/bits/wchar.h \
+ actions/../objects/../gdk_structs.h actions/../objects/../exp_array.h \
+ actions/../objects/QCADDesignObject.h \
  actions/../objects/mouse_handler_struct.h \
  actions/../objects/object_helpers.h actions/../objects/QCADUndoEntry.h \
  actions/../objects/QCADLabel.h actions/../objects/../exp_pixmap.h \
@@ -1825,6 +1828,12 @@ actions/../objects/object_helpers.h:
 actions/../objects/../hsl2rgb.h:
 
 actions/../objects/QCADCell.h:
+
+/usr/lib/gcc/x86_64-linux-gnu/5/include/stdint.h:
+
+/usr/include/stdint.h:
+
+/usr/include/x86_64-linux-gnu/bits/wchar.h:
 
 actions/../objects/../gdk_structs.h:
 

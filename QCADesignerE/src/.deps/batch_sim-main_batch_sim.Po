@@ -110,6 +110,8 @@ batch_sim-main_batch_sim.o: main_batch_sim.c /usr/include/stdc-predef.h \
  /usr/include/glib-2.0/glib/glib-autocleanups.h fileio.h design.h \
  exp_array.h objects/object_helpers.h objects/../gdk_structs.h \
  objects/../hsl2rgb.h objects/../gdk_structs.h objects/QCADCell.h \
+ /usr/lib/gcc/x86_64-linux-gnu/5/include/stdint.h /usr/include/stdint.h \
+ /usr/include/x86_64-linux-gnu/bits/wchar.h \
  /usr/include/glib-2.0/glib-object.h \
  /usr/include/glib-2.0/gobject/gbinding.h \
  /usr/include/glib-2.0/gobject/gobject.h \
@@ -440,6 +442,12 @@ objects/../hsl2rgb.h:
 objects/../gdk_structs.h:
 
 objects/QCADCell.h:
+
+/usr/lib/gcc/x86_64-linux-gnu/5/include/stdint.h:
+
+/usr/include/stdint.h:
+
+/usr/include/x86_64-linux-gnu/bits/wchar.h:
 
 /usr/include/glib-2.0/glib-object.h:
 

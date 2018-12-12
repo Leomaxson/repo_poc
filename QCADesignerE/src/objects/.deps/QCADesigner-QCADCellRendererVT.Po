@@ -561,6 +561,8 @@ objects/QCADesigner-QCADCellRendererVT.o: objects/QCADCellRendererVT.c \
  objects/../bus_layout_dialog.h objects/../design.h \
  objects/../exp_array.h objects/../objects/object_helpers.h \
  objects/../objects/../hsl2rgb.h objects/../objects/QCADCell.h \
+ /usr/lib/gcc/x86_64-linux-gnu/5/include/stdint.h /usr/include/stdint.h \
+ /usr/include/x86_64-linux-gnu/bits/wchar.h \
  objects/../objects/../gdk_structs.h objects/../objects/../exp_array.h \
  objects/../objects/QCADDesignObject.h \
  objects/../objects/mouse_handler_struct.h \
@@ -1831,6 +1833,12 @@ objects/../objects/object_helpers.h:
 objects/../objects/../hsl2rgb.h:
 
 objects/../objects/QCADCell.h:
+
+/usr/lib/gcc/x86_64-linux-gnu/5/include/stdint.h:
+
+/usr/include/stdint.h:
+
+/usr/include/x86_64-linux-gnu/bits/wchar.h:
 
 objects/../objects/../gdk_structs.h:
 

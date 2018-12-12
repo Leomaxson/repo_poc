@@ -144,7 +144,9 @@ objects/batch_sim-QCADCell.o: objects/QCADCell.c \
  objects/../generic_utils.h objects/../support.h /usr/include/libintl.h \
  /usr/include/locale.h /usr/include/x86_64-linux-gnu/bits/locale.h \
  objects/../global_consts.h objects/../custom_widgets.h \
- objects/../gdk_structs.h objects/QCADCell.h objects/../gdk_structs.h \
+ objects/../gdk_structs.h objects/QCADCell.h \
+ /usr/lib/gcc/x86_64-linux-gnu/5/include/stdint.h /usr/include/stdint.h \
+ /usr/include/x86_64-linux-gnu/bits/wchar.h objects/../gdk_structs.h \
  objects/../exp_array.h objects/QCADDesignObject.h \
  objects/mouse_handler_struct.h objects/object_helpers.h \
  objects/../hsl2rgb.h objects/QCADLabel.h objects/QCADStretchyObject.h \
@@ -513,6 +515,12 @@ objects/../custom_widgets.h:
 objects/../gdk_structs.h:
 
 objects/QCADCell.h:
+
+/usr/lib/gcc/x86_64-linux-gnu/5/include/stdint.h:
+
+/usr/include/stdint.h:
+
+/usr/include/x86_64-linux-gnu/bits/wchar.h:
 
 objects/../gdk_structs.h:
 

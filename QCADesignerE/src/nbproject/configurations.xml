@@ -112,7 +112,7 @@
           <buildCommandWorkingDir>.</buildCommandWorkingDir>
           <buildCommand>${MAKE} -f Makefile</buildCommand>
           <cleanCommand>${MAKE} -f Makefile clean</cleanCommand>
-          <executablePath></executablePath>
+          <executablePath>QCADesigner</executablePath>
           <cTool>
             <incDir>
               <pElem>.</pElem>
@@ -219,37 +219,7 @@
           </preprocessorList>
         </cTool>
       </item>
-      <item path="bistable_simulation.c" ex="false" tool="0" flavor2="0">
-        <cTool flags="0">
-          <incDir>
-            <pElem>/usr/include/glib-2.0</pElem>
-            <pElem>/usr/lib/x86_64-linux-gnu/glib-2.0/include</pElem>
-          </incDir>
-        </cTool>
-      </item>
-      <item path="bus_layout_dialog.c" ex="false" tool="0" flavor2="2">
-        <cTool flags="0">
-          <incDir>
-            <pElem>/usr/include/gtk-2.0</pElem>
-            <pElem>/usr/lib/x86_64-linux-gnu/gtk-2.0/include</pElem>
-            <pElem>/usr/include/gio-unix-2.0</pElem>
-            <pElem>/usr/include/cairo</pElem>
-            <pElem>/usr/include/pango-1.0</pElem>
-            <pElem>/usr/include/atk-1.0</pElem>
-            <pElem>/usr/include/pixman-1</pElem>
-            <pElem>/usr/include/libpng12</pElem>
-            <pElem>/usr/include/gdk-pixbuf-2.0</pElem>
-            <pElem>/usr/include/harfbuzz</pElem>
-            <pElem>/usr/include/glib-2.0</pElem>
-            <pElem>/usr/lib/x86_64-linux-gnu/glib-2.0/include</pElem>
-            <pElem>/usr/include/freetype2</pElem>
-          </incDir>
-          <preprocessorList>
-            <Elem>GTK_GUI</Elem>
-          </preprocessorList>
-        </cTool>
-      </item>
-      <item path="callbacks.c" ex="false" tool="0" flavor2="0">
+      <item path="bistable_simulation.c" ex="false" tool="0" flavor2="2">
         <cTool flags="0">
           <incDir>
             <pElem>/usr/include/gtk-2.0</pElem>
@@ -273,20 +243,100 @@
           </preprocessorList>
         </cTool>
       </item>
-      <item path="coherence_vector.c" ex="false" tool="0" flavor2="0">
+      <item path="bus_layout_dialog.c" ex="false" tool="0" flavor2="2">
         <cTool flags="0">
           <incDir>
+            <pElem>/usr/include/gtk-2.0</pElem>
+            <pElem>/usr/lib/x86_64-linux-gnu/gtk-2.0/include</pElem>
+            <pElem>/usr/include/gio-unix-2.0</pElem>
+            <pElem>/usr/include/cairo</pElem>
+            <pElem>/usr/include/pango-1.0</pElem>
+            <pElem>/usr/include/atk-1.0</pElem>
+            <pElem>/usr/include/pixman-1</pElem>
+            <pElem>/usr/include/libpng12</pElem>
+            <pElem>/usr/include/gdk-pixbuf-2.0</pElem>
+            <pElem>/usr/include/harfbuzz</pElem>
             <pElem>/usr/include/glib-2.0</pElem>
             <pElem>/usr/lib/x86_64-linux-gnu/glib-2.0/include</pElem>
+            <pElem>/usr/include/freetype2</pElem>
           </incDir>
+          <preprocessorList>
+            <Elem>DESIGNER</Elem>
+            <Elem>GTK_GUI</Elem>
+            <Elem>UNDO_REDO</Elem>
+          </preprocessorList>
         </cTool>
       </item>
-      <item path="coherence_vector_energy.c" ex="false" tool="0" flavor2="0">
+      <item path="callbacks.c" ex="false" tool="0" flavor2="2">
         <cTool flags="0">
           <incDir>
+            <pElem>/usr/include/gtk-2.0</pElem>
+            <pElem>/usr/lib/x86_64-linux-gnu/gtk-2.0/include</pElem>
+            <pElem>/usr/include/gio-unix-2.0</pElem>
+            <pElem>/usr/include/cairo</pElem>
+            <pElem>/usr/include/pango-1.0</pElem>
+            <pElem>/usr/include/atk-1.0</pElem>
+            <pElem>/usr/include/pixman-1</pElem>
+            <pElem>/usr/include/libpng12</pElem>
+            <pElem>/usr/include/gdk-pixbuf-2.0</pElem>
+            <pElem>/usr/include/harfbuzz</pElem>
             <pElem>/usr/include/glib-2.0</pElem>
             <pElem>/usr/lib/x86_64-linux-gnu/glib-2.0/include</pElem>
+            <pElem>/usr/include/freetype2</pElem>
           </incDir>
+          <preprocessorList>
+            <Elem>DESIGNER</Elem>
+            <Elem>GTK_GUI</Elem>
+            <Elem>UNDO_REDO</Elem>
+          </preprocessorList>
+        </cTool>
+      </item>
+      <item path="coherence_vector.c" ex="false" tool="0" flavor2="2">
+        <cTool flags="0">
+          <incDir>
+            <pElem>/usr/include/gtk-2.0</pElem>
+            <pElem>/usr/lib/x86_64-linux-gnu/gtk-2.0/include</pElem>
+            <pElem>/usr/include/gio-unix-2.0</pElem>
+            <pElem>/usr/include/cairo</pElem>
+            <pElem>/usr/include/pango-1.0</pElem>
+            <pElem>/usr/include/atk-1.0</pElem>
+            <pElem>/usr/include/pixman-1</pElem>
+            <pElem>/usr/include/libpng12</pElem>
+            <pElem>/usr/include/gdk-pixbuf-2.0</pElem>
+            <pElem>/usr/include/harfbuzz</pElem>
+            <pElem>/usr/include/glib-2.0</pElem>
+            <pElem>/usr/lib/x86_64-linux-gnu/glib-2.0/include</pElem>
+            <pElem>/usr/include/freetype2</pElem>
+          </incDir>
+          <preprocessorList>
+            <Elem>DESIGNER</Elem>
+            <Elem>GTK_GUI</Elem>
+            <Elem>UNDO_REDO</Elem>
+          </preprocessorList>
+        </cTool>
+      </item>
+      <item path="coherence_vector_energy.c" ex="false" tool="0" flavor2="2">
+        <cTool flags="0">
+          <incDir>
+            <pElem>/usr/include/gtk-2.0</pElem>
+            <pElem>/usr/lib/x86_64-linux-gnu/gtk-2.0/include</pElem>
+            <pElem>/usr/include/gio-unix-2.0</pElem>
+            <pElem>/usr/include/cairo</pElem>
+            <pElem>/usr/include/pango-1.0</pElem>
+            <pElem>/usr/include/atk-1.0</pElem>
+            <pElem>/usr/include/pixman-1</pElem>
+            <pElem>/usr/include/libpng12</pElem>
+            <pElem>/usr/include/gdk-pixbuf-2.0</pElem>
+            <pElem>/usr/include/harfbuzz</pElem>
+            <pElem>/usr/include/glib-2.0</pElem>
+            <pElem>/usr/lib/x86_64-linux-gnu/glib-2.0/include</pElem>
+            <pElem>/usr/include/freetype2</pElem>
+          </incDir>
+          <preprocessorList>
+            <Elem>DESIGNER</Elem>
+            <Elem>GTK_GUI</Elem>
+            <Elem>UNDO_REDO</Elem>
+          </preprocessorList>
         </cTool>
       </item>
       <item path="coherence_vector_energy_properties_dialog.c"
@@ -343,7 +393,7 @@
           </preprocessorList>
         </cTool>
       </item>
-      <item path="custom_widgets.c" ex="false" tool="0" flavor2="0">
+      <item path="custom_widgets.c" ex="false" tool="0" flavor2="2">
         <cTool flags="0">
           <incDir>
             <pElem>/usr/include/gtk-2.0</pElem>
@@ -361,7 +411,9 @@
             <pElem>/usr/include/freetype2</pElem>
           </incDir>
           <preprocessorList>
+            <Elem>DESIGNER</Elem>
             <Elem>GTK_GUI</Elem>
+            <Elem>UNDO_REDO</Elem>
           </preprocessorList>
         </cTool>
       </item>
@@ -383,11 +435,13 @@
             <pElem>/usr/include/freetype2</pElem>
           </incDir>
           <preprocessorList>
+            <Elem>DESIGNER</Elem>
             <Elem>GTK_GUI</Elem>
+            <Elem>UNDO_REDO</Elem>
           </preprocessorList>
         </cTool>
       </item>
-      <item path="exp_array.c" ex="false" tool="0" flavor2="0">
+      <item path="exp_array.c" ex="false" tool="0" flavor2="2">
         <cTool flags="0">
           <incDir>
             <pElem>/usr/include/gtk-2.0</pElem>
@@ -405,11 +459,13 @@
             <pElem>/usr/include/freetype2</pElem>
           </incDir>
           <preprocessorList>
+            <Elem>DESIGNER</Elem>
             <Elem>GTK_GUI</Elem>
+            <Elem>UNDO_REDO</Elem>
           </preprocessorList>
         </cTool>
       </item>
-      <item path="exp_pixmap.c" ex="false" tool="0" flavor2="0">
+      <item path="exp_pixmap.c" ex="false" tool="0" flavor2="2">
         <cTool flags="0">
           <incDir>
             <pElem>/usr/include/gtk-2.0</pElem>
@@ -427,7 +483,9 @@
             <pElem>/usr/include/freetype2</pElem>
           </incDir>
           <preprocessorList>
+            <Elem>DESIGNER</Elem>
             <Elem>GTK_GUI</Elem>
+            <Elem>UNDO_REDO</Elem>
           </preprocessorList>
         </cTool>
       </item>
@@ -473,11 +531,13 @@
             <pElem>/usr/include/freetype2</pElem>
           </incDir>
           <preprocessorList>
+            <Elem>DESIGNER</Elem>
             <Elem>GTK_GUI</Elem>
+            <Elem>UNDO_REDO</Elem>
           </preprocessorList>
         </cTool>
       </folder>
-      <item path="file_selection_window.c" ex="false" tool="0" flavor2="0">
+      <item path="file_selection_window.c" ex="false" tool="0" flavor2="2">
         <cTool flags="0">
           <incDir>
             <pElem>/usr/include/gtk-2.0</pElem>
@@ -495,7 +555,9 @@
             <pElem>/usr/include/freetype2</pElem>
           </incDir>
           <preprocessorList>
+            <Elem>DESIGNER</Elem>
             <Elem>GTK_GUI</Elem>
+            <Elem>UNDO_REDO</Elem>
           </preprocessorList>
         </cTool>
       </item>
@@ -517,11 +579,13 @@
             <pElem>/usr/include/freetype2</pElem>
           </incDir>
           <preprocessorList>
+            <Elem>DESIGNER</Elem>
             <Elem>GTK_GUI</Elem>
+            <Elem>UNDO_REDO</Elem>
           </preprocessorList>
         </cTool>
       </item>
-      <item path="fileio_helpers.c" ex="false" tool="0" flavor2="0">
+      <item path="fileio_helpers.c" ex="false" tool="0" flavor2="2">
         <cTool flags="0">
           <incDir>
             <pElem>/usr/include/gtk-2.0</pElem>
@@ -539,11 +603,13 @@
             <pElem>/usr/include/freetype2</pElem>
           </incDir>
           <preprocessorList>
+            <Elem>DESIGNER</Elem>
             <Elem>GTK_GUI</Elem>
+            <Elem>UNDO_REDO</Elem>
           </preprocessorList>
         </cTool>
       </item>
-      <item path="generic_utils.c" ex="false" tool="0" flavor2="0">
+      <item path="generic_utils.c" ex="false" tool="0" flavor2="2">
         <cTool flags="0">
           <incDir>
             <pElem>/usr/include/gtk-2.0</pElem>
@@ -561,7 +627,9 @@
             <pElem>/usr/include/freetype2</pElem>
           </incDir>
           <preprocessorList>
+            <Elem>DESIGNER</Elem>
             <Elem>GTK_GUI</Elem>
+            <Elem>UNDO_REDO</Elem>
           </preprocessorList>
         </cTool>
       </item>
@@ -583,7 +651,9 @@
             <pElem>/usr/include/freetype2</pElem>
           </incDir>
           <preprocessorList>
+            <Elem>DESIGNER</Elem>
             <Elem>GTK_GUI</Elem>
+            <Elem>UNDO_REDO</Elem>
           </preprocessorList>
         </cTool>
       </item>
@@ -605,7 +675,9 @@
             <pElem>/usr/include/freetype2</pElem>
           </incDir>
           <preprocessorList>
+            <Elem>DESIGNER</Elem>
             <Elem>GTK_GUI</Elem>
+            <Elem>UNDO_REDO</Elem>
           </preprocessorList>
         </cTool>
       </item>
@@ -627,7 +699,9 @@
             <pElem>/usr/include/freetype2</pElem>
           </incDir>
           <preprocessorList>
+            <Elem>DESIGNER</Elem>
             <Elem>GTK_GUI</Elem>
+            <Elem>UNDO_REDO</Elem>
           </preprocessorList>
         </cTool>
       </item>
@@ -649,7 +723,9 @@
             <pElem>/usr/include/freetype2</pElem>
           </incDir>
           <preprocessorList>
+            <Elem>DESIGNER</Elem>
             <Elem>GTK_GUI</Elem>
+            <Elem>UNDO_REDO</Elem>
           </preprocessorList>
         </cTool>
       </item>
@@ -671,7 +747,9 @@
             <pElem>/usr/include/freetype2</pElem>
           </incDir>
           <preprocessorList>
+            <Elem>DESIGNER</Elem>
             <Elem>GTK_GUI</Elem>
+            <Elem>UNDO_REDO</Elem>
           </preprocessorList>
         </cTool>
       </item>
@@ -693,11 +771,13 @@
             <pElem>/usr/include/freetype2</pElem>
           </incDir>
           <preprocessorList>
+            <Elem>DESIGNER</Elem>
             <Elem>GTK_GUI</Elem>
+            <Elem>UNDO_REDO</Elem>
           </preprocessorList>
         </cTool>
       </item>
-      <item path="honeycomb_thresholds_dialog.c" ex="false" tool="0" flavor2="0">
+      <item path="honeycomb_thresholds_dialog.c" ex="false" tool="0" flavor2="2">
         <cTool flags="0">
           <incDir>
             <pElem>/usr/include/gtk-2.0</pElem>
@@ -715,11 +795,13 @@
             <pElem>/usr/include/freetype2</pElem>
           </incDir>
           <preprocessorList>
+            <Elem>DESIGNER</Elem>
             <Elem>GTK_GUI</Elem>
+            <Elem>UNDO_REDO</Elem>
           </preprocessorList>
         </cTool>
       </item>
-      <item path="hsl2rgb.c" ex="false" tool="0" flavor2="0">
+      <item path="hsl2rgb.c" ex="false" tool="0" flavor2="2">
         <cTool flags="0">
           <incDir>
             <pElem>/usr/include/gtk-2.0</pElem>
@@ -737,7 +819,9 @@
             <pElem>/usr/include/freetype2</pElem>
           </incDir>
           <preprocessorList>
+            <Elem>DESIGNER</Elem>
             <Elem>GTK_GUI</Elem>
+            <Elem>UNDO_REDO</Elem>
           </preprocessorList>
         </cTool>
       </item>
@@ -861,7 +945,7 @@
           </preprocessorList>
         </cTool>
       </item>
-      <item path="main_batch_sim.c" ex="false" tool="0" flavor2="0">
+      <item path="main_batch_sim.c" ex="false" tool="0" flavor2="2">
         <cTool flags="0">
           <incDir>
             <pElem>/usr/include/glib-2.0</pElem>
@@ -869,7 +953,7 @@
           </incDir>
         </cTool>
       </item>
-      <item path="main_graph_dialog.c" ex="false" tool="0" flavor2="0">
+      <item path="main_graph_dialog.c" ex="false" tool="0" flavor2="2">
         <cTool flags="0">
           <incDir>
             <pElem>/usr/include/gtk-2.0</pElem>
@@ -900,37 +984,29 @@
             tool="0"
             flavor2="2">
         <cTool flags="0">
-          <preprocessorList>
-            <Elem>DESIGNER</Elem>
-            <Elem>UNDO_REDO</Elem>
-          </preprocessorList>
         </cTool>
       </item>
       <item path="objects/QCADCellRendererVT.c" ex="false" tool="0" flavor2="2">
         <cTool flags="0">
-          <preprocessorList>
-            <Elem>DESIGNER</Elem>
-            <Elem>UNDO_REDO</Elem>
-          </preprocessorList>
         </cTool>
       </item>
       <item path="objects/QCADClockCombo.c" ex="false" tool="0" flavor2="0">
         <cTool flags="0">
         </cTool>
       </item>
-      <item path="objects/QCADCompoundDO.c" ex="false" tool="0" flavor2="0">
+      <item path="objects/QCADCompoundDO.c" ex="false" tool="0" flavor2="2">
         <cTool flags="0">
         </cTool>
       </item>
-      <item path="objects/QCADDOContainer.c" ex="false" tool="0" flavor2="0">
+      <item path="objects/QCADDOContainer.c" ex="false" tool="0" flavor2="2">
         <cTool flags="0">
         </cTool>
       </item>
-      <item path="objects/QCADDesignObject.c" ex="false" tool="0" flavor2="0">
+      <item path="objects/QCADDesignObject.c" ex="false" tool="0" flavor2="2">
         <cTool flags="0">
         </cTool>
       </item>
-      <item path="objects/QCADLabel.c" ex="false" tool="0" flavor2="0">
+      <item path="objects/QCADLabel.c" ex="false" tool="0" flavor2="2">
         <cTool flags="0">
         </cTool>
       </item>
@@ -938,15 +1014,15 @@
         <cTool flags="0">
         </cTool>
       </item>
-      <item path="objects/QCADPrintDialog.c" ex="false" tool="0" flavor2="0">
+      <item path="objects/QCADPrintDialog.c" ex="false" tool="0" flavor2="2">
         <cTool flags="0">
         </cTool>
       </item>
-      <item path="objects/QCADRuler.c" ex="false" tool="0" flavor2="0">
+      <item path="objects/QCADRuler.c" ex="false" tool="0" flavor2="2">
         <cTool flags="0">
         </cTool>
       </item>
-      <item path="objects/QCADStretchyObject.c" ex="false" tool="0" flavor2="0">
+      <item path="objects/QCADStretchyObject.c" ex="false" tool="0" flavor2="2">
         <cTool flags="0">
         </cTool>
       </item>
@@ -956,41 +1032,25 @@
       </item>
       <item path="objects/QCADTreeViewContainer.c" ex="false" tool="0" flavor2="2">
         <cTool flags="0">
-          <preprocessorList>
-            <Elem>DESIGNER</Elem>
-            <Elem>UNDO_REDO</Elem>
-          </preprocessorList>
         </cTool>
       </item>
       <item path="objects/QCADUndoEntry.c" ex="false" tool="0" flavor2="2">
         <cTool flags="0">
-          <preprocessorList>
-            <Elem>DESIGNER</Elem>
-            <Elem>UNDO_REDO</Elem>
-          </preprocessorList>
         </cTool>
       </item>
       <item path="objects/QCADUndoEntryGroup.c" ex="false" tool="0" flavor2="2">
         <cTool flags="0">
-          <preprocessorList>
-            <Elem>DESIGNER</Elem>
-            <Elem>UNDO_REDO</Elem>
-          </preprocessorList>
         </cTool>
       </item>
       <item path="objects/mouse_handlers.c" ex="false" tool="0" flavor2="2">
         <cTool flags="0">
-          <preprocessorList>
-            <Elem>DESIGNER</Elem>
-            <Elem>UNDO_REDO</Elem>
-          </preprocessorList>
         </cTool>
       </item>
-      <item path="objects/object_helpers.c" ex="false" tool="0" flavor2="0">
+      <item path="objects/object_helpers.c" ex="false" tool="0" flavor2="2">
         <cTool flags="0">
         </cTool>
       </item>
-      <item path="print.c" ex="false" tool="0" flavor2="0">
+      <item path="print.c" ex="false" tool="0" flavor2="2">
         <cTool flags="0">
           <incDir>
             <pElem>/usr/include/gtk-2.0</pElem>
@@ -1014,7 +1074,7 @@
           </preprocessorList>
         </cTool>
       </item>
-      <item path="print_graph.c" ex="false" tool="0" flavor2="0">
+      <item path="print_graph.c" ex="false" tool="0" flavor2="2">
         <cTool flags="0">
           <incDir>
             <pElem>/usr/include/gtk-2.0</pElem>
@@ -1038,7 +1098,7 @@
           </preprocessorList>
         </cTool>
       </item>
-      <item path="print_graph_properties_dialog.c" ex="false" tool="0" flavor2="0">
+      <item path="print_graph_properties_dialog.c" ex="false" tool="0" flavor2="2">
         <cTool flags="0">
           <incDir>
             <pElem>/usr/include/gtk-2.0</pElem>
@@ -1056,11 +1116,13 @@
             <pElem>/usr/include/freetype2</pElem>
           </incDir>
           <preprocessorList>
+            <Elem>DESIGNER</Elem>
             <Elem>GTK_GUI</Elem>
+            <Elem>UNDO_REDO</Elem>
           </preprocessorList>
         </cTool>
       </item>
-      <item path="print_preview.c" ex="false" tool="0" flavor2="0">
+      <item path="print_preview.c" ex="false" tool="0" flavor2="2">
         <cTool flags="0">
           <incDir>
             <pElem>/usr/include/gtk-2.0</pElem>
@@ -1078,7 +1140,9 @@
             <pElem>/usr/include/freetype2</pElem>
           </incDir>
           <preprocessorList>
+            <Elem>DESIGNER</Elem>
             <Elem>GTK_GUI</Elem>
+            <Elem>UNDO_REDO</Elem>
           </preprocessorList>
         </cTool>
       </item>
@@ -1133,7 +1197,7 @@
           </preprocessorList>
         </cTool>
       </item>
-      <item path="print_util.c" ex="false" tool="0" flavor2="0">
+      <item path="print_util.c" ex="false" tool="0" flavor2="2">
         <cTool flags="0">
           <incDir>
             <pElem>/usr/include/gtk-2.0</pElem>
@@ -1277,15 +1341,7 @@
           </preprocessorList>
         </cTool>
       </item>
-      <item path="simulation.c" ex="false" tool="0" flavor2="0">
-        <cTool flags="0">
-          <incDir>
-            <pElem>/usr/include/glib-2.0</pElem>
-            <pElem>/usr/lib/x86_64-linux-gnu/glib-2.0/include</pElem>
-          </incDir>
-        </cTool>
-      </item>
-      <item path="simulation_data.c" ex="false" tool="0" flavor2="0">
+      <item path="simulation.c" ex="false" tool="0" flavor2="2">
         <cTool flags="0">
           <incDir>
             <pElem>/usr/include/gtk-2.0</pElem>
@@ -1303,11 +1359,13 @@
             <pElem>/usr/include/freetype2</pElem>
           </incDir>
           <preprocessorList>
+            <Elem>DESIGNER</Elem>
             <Elem>GTK_GUI</Elem>
+            <Elem>UNDO_REDO</Elem>
           </preprocessorList>
         </cTool>
       </item>
-      <item path="support.c" ex="false" tool="0" flavor2="0">
+      <item path="simulation_data.c" ex="false" tool="0" flavor2="2">
         <cTool flags="0">
           <incDir>
             <pElem>/usr/include/gtk-2.0</pElem>
@@ -1325,7 +1383,33 @@
             <pElem>/usr/include/freetype2</pElem>
           </incDir>
           <preprocessorList>
+            <Elem>DESIGNER</Elem>
             <Elem>GTK_GUI</Elem>
+            <Elem>UNDO_REDO</Elem>
+          </preprocessorList>
+        </cTool>
+      </item>
+      <item path="support.c" ex="false" tool="0" flavor2="2">
+        <cTool flags="0">
+          <incDir>
+            <pElem>/usr/include/gtk-2.0</pElem>
+            <pElem>/usr/lib/x86_64-linux-gnu/gtk-2.0/include</pElem>
+            <pElem>/usr/include/gio-unix-2.0</pElem>
+            <pElem>/usr/include/cairo</pElem>
+            <pElem>/usr/include/pango-1.0</pElem>
+            <pElem>/usr/include/atk-1.0</pElem>
+            <pElem>/usr/include/pixman-1</pElem>
+            <pElem>/usr/include/libpng12</pElem>
+            <pElem>/usr/include/gdk-pixbuf-2.0</pElem>
+            <pElem>/usr/include/harfbuzz</pElem>
+            <pElem>/usr/include/glib-2.0</pElem>
+            <pElem>/usr/lib/x86_64-linux-gnu/glib-2.0/include</pElem>
+            <pElem>/usr/include/freetype2</pElem>
+          </incDir>
+          <preprocessorList>
+            <Elem>DESIGNER</Elem>
+            <Elem>GTK_GUI</Elem>
+            <Elem>UNDO_REDO</Elem>
           </preprocessorList>
         </cTool>
       </item>

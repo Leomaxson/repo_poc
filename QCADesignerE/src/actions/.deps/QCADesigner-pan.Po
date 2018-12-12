@@ -558,6 +558,8 @@ actions/QCADesigner-pan.o: actions/pan.c /usr/include/stdc-predef.h \
  actions/../objects/object_helpers.h actions/../objects/../hsl2rgb.h \
  actions/../callback_helpers.h actions/../design.h actions/../exp_array.h \
  actions/../objects/object_helpers.h actions/../objects/QCADCell.h \
+ /usr/lib/gcc/x86_64-linux-gnu/5/include/stdint.h /usr/include/stdint.h \
+ /usr/include/x86_64-linux-gnu/bits/wchar.h \
  actions/../objects/../gdk_structs.h actions/../objects/../exp_array.h \
  actions/../objects/QCADDesignObject.h \
  actions/../objects/mouse_handler_struct.h \
@@ -1827,6 +1829,12 @@ actions/../exp_array.h:
 actions/../objects/object_helpers.h:
 
 actions/../objects/QCADCell.h:
+
+/usr/lib/gcc/x86_64-linux-gnu/5/include/stdint.h:
+
+/usr/include/stdint.h:
+
+/usr/include/x86_64-linux-gnu/bits/wchar.h:
 
 actions/../objects/../gdk_structs.h:
 

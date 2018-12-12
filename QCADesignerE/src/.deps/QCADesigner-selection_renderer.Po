@@ -559,7 +559,9 @@ QCADesigner-selection_renderer.o: selection_renderer.c \
  /usr/include/gtk-2.0/gtk/gtkpreview.h \
  /usr/include/gtk-2.0/gtk/gtktipsquery.h objects/object_helpers.h \
  objects/../hsl2rgb.h exp_pixmap.h selection_renderer.h design.h \
- exp_array.h objects/QCADCell.h objects/../gdk_structs.h \
+ exp_array.h objects/QCADCell.h \
+ /usr/lib/gcc/x86_64-linux-gnu/5/include/stdint.h /usr/include/stdint.h \
+ /usr/include/x86_64-linux-gnu/bits/wchar.h objects/../gdk_structs.h \
  objects/../exp_array.h objects/QCADDesignObject.h \
  objects/mouse_handler_struct.h objects/object_helpers.h \
  objects/QCADUndoEntry.h objects/QCADLabel.h objects/../exp_pixmap.h \
@@ -1831,6 +1833,12 @@ design.h:
 exp_array.h:
 
 objects/QCADCell.h:
+
+/usr/lib/gcc/x86_64-linux-gnu/5/include/stdint.h:
+
+/usr/include/stdint.h:
+
+/usr/include/x86_64-linux-gnu/bits/wchar.h:
 
 objects/../gdk_structs.h:
 

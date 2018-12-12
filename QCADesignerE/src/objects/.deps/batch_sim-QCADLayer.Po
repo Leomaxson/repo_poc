@@ -138,7 +138,9 @@ objects/batch_sim-QCADLayer.o: objects/QCADLayer.c \
  objects/QCADStretchyObject.h objects/../gdk_structs.h \
  objects/QCADDesignObject.h objects/mouse_handler_struct.h \
  objects/object_helpers.h objects/../hsl2rgb.h objects/../exp_array.h \
- objects/QCADLayer.h objects/QCADCell.h objects/QCADLabel.h \
+ objects/QCADLayer.h objects/QCADCell.h \
+ /usr/lib/gcc/x86_64-linux-gnu/5/include/stdint.h /usr/include/stdint.h \
+ /usr/include/x86_64-linux-gnu/bits/wchar.h objects/QCADLabel.h \
  objects/QCADUndoEntry.h objects/QCADCompoundDO.h \
  objects/QCADDOContainer.h objects/objects_debug.h
 
@@ -497,6 +499,12 @@ objects/../exp_array.h:
 objects/QCADLayer.h:
 
 objects/QCADCell.h:
+
+/usr/lib/gcc/x86_64-linux-gnu/5/include/stdint.h:
+
+/usr/include/stdint.h:
+
+/usr/include/x86_64-linux-gnu/bits/wchar.h:
 
 objects/QCADLabel.h:
 

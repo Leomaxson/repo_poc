@@ -36,7 +36,7 @@
 #include "objects_debug.h"
 #include "support.h"
 #include "QCADClockCombo.h"
-#include "../util.h"
+#include "../print_util.h"
 
 static void qcad_clock_combo_class_init (GObjectClass *klass, gpointer data) ;
 static void qcad_clock_combo_instance_init (GObject *object, gpointer data) ;

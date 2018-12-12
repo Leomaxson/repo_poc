@@ -557,7 +557,9 @@ graph_dialog-simulation_data.o: simulation_data.c \
  /usr/include/gtk-2.0/gtk/gtkoptionmenu.h \
  /usr/include/gtk-2.0/gtk/gtkpreview.h \
  /usr/include/gtk-2.0/gtk/gtktipsquery.h objects/../hsl2rgb.h \
- objects/QCADCell.h objects/../gdk_structs.h objects/../exp_array.h \
+ objects/QCADCell.h /usr/lib/gcc/x86_64-linux-gnu/5/include/stdint.h \
+ /usr/include/stdint.h /usr/include/x86_64-linux-gnu/bits/wchar.h \
+ objects/../gdk_structs.h objects/../exp_array.h \
  objects/QCADDesignObject.h objects/mouse_handler_struct.h \
  objects/object_helpers.h objects/QCADLabel.h objects/../exp_pixmap.h \
  objects/QCADStretchyObject.h objects/QCADUndoEntry.h \
@@ -1817,6 +1819,12 @@ objects/object_helpers.h:
 objects/../hsl2rgb.h:
 
 objects/QCADCell.h:
+
+/usr/lib/gcc/x86_64-linux-gnu/5/include/stdint.h:
+
+/usr/include/stdint.h:
+
+/usr/include/x86_64-linux-gnu/bits/wchar.h:
 
 objects/../gdk_structs.h:
 

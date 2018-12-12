@@ -563,7 +563,9 @@ QCADesigner-main.o: main.c /usr/include/stdc-predef.h \
  /usr/include/x86_64-linux-gnu/bits/stdlib.h callbacks.h interface.h \
  support.h /usr/include/libintl.h about.h print.h simulation.h \
  simulation_data.h design.h exp_array.h objects/object_helpers.h \
- objects/../hsl2rgb.h objects/QCADCell.h objects/../gdk_structs.h \
+ objects/../hsl2rgb.h objects/QCADCell.h \
+ /usr/lib/gcc/x86_64-linux-gnu/5/include/stdint.h /usr/include/stdint.h \
+ /usr/include/x86_64-linux-gnu/bits/wchar.h objects/../gdk_structs.h \
  objects/../exp_array.h objects/QCADDesignObject.h \
  objects/mouse_handler_struct.h objects/object_helpers.h \
  objects/QCADUndoEntry.h objects/QCADLabel.h objects/../exp_pixmap.h \
@@ -1867,6 +1869,12 @@ objects/object_helpers.h:
 objects/../hsl2rgb.h:
 
 objects/QCADCell.h:
+
+/usr/lib/gcc/x86_64-linux-gnu/5/include/stdint.h:
+
+/usr/include/stdint.h:
+
+/usr/include/x86_64-linux-gnu/bits/wchar.h:
 
 objects/../gdk_structs.h:
 

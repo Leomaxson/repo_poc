@@ -558,7 +558,9 @@ graph_dialog-graph_dialog_callbacks.o: graph_dialog_callbacks.c \
  /usr/include/gtk-2.0/gtk/gtktipsquery.h /usr/include/libintl.h \
  /usr/include/locale.h /usr/include/x86_64-linux-gnu/bits/locale.h \
  fileio.h design.h exp_array.h objects/object_helpers.h \
- objects/../hsl2rgb.h objects/QCADCell.h objects/../gdk_structs.h \
+ objects/../hsl2rgb.h objects/QCADCell.h \
+ /usr/lib/gcc/x86_64-linux-gnu/5/include/stdint.h /usr/include/stdint.h \
+ /usr/include/x86_64-linux-gnu/bits/wchar.h objects/../gdk_structs.h \
  objects/../exp_array.h objects/QCADDesignObject.h \
  objects/mouse_handler_struct.h objects/object_helpers.h \
  objects/QCADLabel.h objects/../exp_pixmap.h objects/QCADStretchyObject.h \
@@ -1848,6 +1850,12 @@ objects/object_helpers.h:
 objects/../hsl2rgb.h:
 
 objects/QCADCell.h:
+
+/usr/lib/gcc/x86_64-linux-gnu/5/include/stdint.h:
+
+/usr/include/stdint.h:
+
+/usr/include/x86_64-linux-gnu/bits/wchar.h:
 
 objects/../gdk_structs.h:
 

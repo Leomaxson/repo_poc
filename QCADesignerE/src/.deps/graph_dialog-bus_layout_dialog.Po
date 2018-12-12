@@ -561,7 +561,9 @@ graph_dialog-bus_layout_dialog.o: bus_layout_dialog.c \
  /usr/include/libintl.h /usr/include/locale.h \
  /usr/include/x86_64-linux-gnu/bits/locale.h qcadstock.h design.h \
  exp_array.h objects/object_helpers.h objects/../hsl2rgb.h \
- objects/QCADCell.h objects/../gdk_structs.h objects/../exp_array.h \
+ objects/QCADCell.h /usr/lib/gcc/x86_64-linux-gnu/5/include/stdint.h \
+ /usr/include/stdint.h /usr/include/x86_64-linux-gnu/bits/wchar.h \
+ objects/../gdk_structs.h objects/../exp_array.h \
  objects/QCADDesignObject.h objects/mouse_handler_struct.h \
  objects/object_helpers.h objects/QCADLabel.h objects/../exp_pixmap.h \
  objects/QCADStretchyObject.h objects/QCADUndoEntry.h \
@@ -1841,6 +1843,12 @@ objects/object_helpers.h:
 objects/../hsl2rgb.h:
 
 objects/QCADCell.h:
+
+/usr/lib/gcc/x86_64-linux-gnu/5/include/stdint.h:
+
+/usr/include/stdint.h:
+
+/usr/include/x86_64-linux-gnu/bits/wchar.h:
 
 objects/../gdk_structs.h:
 
