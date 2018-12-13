@@ -36,9 +36,7 @@
 #include "qcadstock.h"
 #include "graph_dialog_interface.h"
 #include "graph_dialog_data.h"
-#include "util.h"
-
-extern int idxNew;
+#include "print_util.h"
 
 GRAPH_DIALOG_DATA *graph_dialog_data_new (SIMULATION_OUTPUT *sim_output, gboolean bOKToFree, double dThreshLower, double dThreshUpper, int base)
   {
@@ -95,7 +93,6 @@ GRAPH_DIALOG_DATA *graph_dialog_data_new (SIMULATION_OUTPUT *sim_output, gboolea
     }
 
   // Add the widgets corresponding to the model lines
-  idxNew = 0;
   while (create_graph_widgets (graph_dialog_data, &itr)) ;
 
   return graph_dialog_data ;
