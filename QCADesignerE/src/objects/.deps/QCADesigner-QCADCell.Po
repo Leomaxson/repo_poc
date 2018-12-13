@@ -592,7 +592,7 @@ objects/QCADesigner-QCADCell.o: objects/QCADCell.c \
  objects/QCADDesignObject.h objects/QCADClockCombo.h \
  objects/mouse_handlers.h objects/mouse_handler_struct.h \
  objects/QCADCompoundDO.h objects/object_helpers.h \
- objects/objects_debug.h objects/../fileio_helpers.h
+ objects/objects_debug.h objects/../fileio_helpers.h generic_utils.h
 
 /usr/include/stdc-predef.h:
 
@@ -1953,3 +1953,5 @@ objects/object_helpers.h:
 objects/objects_debug.h:
 
 objects/../fileio_helpers.h:
+
+generic_utils.h:
