@@ -39,6 +39,7 @@
 #include "global_consts.h"
 #include "custom_widgets.h"
 #include "objects/QCADDOContainer.h"
+#include "generic_utils.h"
 
 #define FLOATS_PER_LINE 5
 
@@ -96,6 +97,7 @@ gboolean open_project_file_fp (FILE *pfile, DESIGN **pdesign)
   {
   double version = 0.0 ;
   gboolean bRet = FALSE ;
+  int nClocks;
 
   if (!check_project_file_magic_fp (pfile, &version))
     return FALSE ;
@@ -112,6 +114,14 @@ gboolean open_project_file_fp (FILE *pfile, DESIGN **pdesign)
     }
 
   SkipPast (pfile, '\0', "[#VERSION]", NULL) ;
+
+  if (!check_project_file_number_clocks(pfile,&nClocks)) {
+      return FALSE;
+  }
+  
+  setNumberOfClocks(nClocks);
+
+  SkipPast (pfile, '\0', "[#CLOCKS]", NULL) ;
 
   bRet = design_unserialize (pdesign, pfile) ;
 
@@ -140,6 +150,26 @@ gboolean check_project_file_magic_fp (FILE *pfile, double *pversion)
   return TRUE ;
   }
 
+gboolean check_project_file_number_clocks (FILE *pfile, int *nClocks)
+  {
+  char *pszLine = NULL, *pszValue = NULL ;
+
+  if (!SkipPast (pfile, '\0', "[CLOCKS]", NULL))
+    return FALSE ;
+
+  if (NULL == (pszLine = ReadLine (pfile, '\0', TRUE)))
+    return FALSE ;
+
+  tokenize_line (pszLine, strlen (pszLine), &pszValue, '=') ;
+
+  if (!strcmp (pszLine, "numberOfClocks"))
+    (*nClocks) = atoi (pszValue) ;
+
+  g_free (pszLine) ;
+
+  return TRUE ;
+  }
+
 gboolean create_file (gchar *file_name, DESIGN *design)
   {
   FILE *pfile = NULL ;
@@ -157,12 +187,16 @@ void create_file_fp (FILE *pfile, DESIGN *design)
   fprintf (pfile, "[VERSION]\n") ;
   fprintf (pfile, "qcadesigner_version=%lf\n", qcadesigner_version) ;
   fprintf (pfile, "[#VERSION]\n") ;
+  fprintf (pfile, "[CLOCKS]\n") ;
+  fprintf (pfile, "numberOfClocks=%u\n", getNumberOfClocks()) ;
+  fprintf (pfile, "[#CLOCKS]\n") ;
 
   design_serialize (design, pfile) ;
   }
 
 void export_block (char *pszFName, DESIGN *design)
   {
+  setlocale(LC_ALL,"C");
   FILE *pfile = NULL ;
 
   if (NULL == (pfile = fopen (pszFName, "w")))
@@ -571,11 +605,12 @@ void simulation_data_serialize (FILE *pfile, simulation_data *sim_data)
   fprintf (pfile, "[SIMULATION_DATA]\n") ;
   fprintf (pfile, "number_samples=%d\n", sim_data->number_samples) ;
   fprintf (pfile, "number_of_traces=%d\n", sim_data->number_of_traces) ;
+  fprintf (pfile, "number_of_zones=%d\n", sim_data->number_of_zones) ;
   fprintf (pfile, "[TRACES]\n") ;
   for (Nix = 0 ; Nix < sim_data->number_of_traces ; Nix++)
     serialize_trace (pfile, &(sim_data->trace[Nix]), sim_data->number_samples) ;
   fprintf (pfile, "[#TRACES]\n[CLOCKS]\n") ;
-  for (Nix = 0 ; Nix < 4 ; Nix++)
+  for (Nix = 0 ; Nix < sim_data->number_of_zones ; Nix++)
     serialize_trace (pfile, &(sim_data->clock_data[Nix]), sim_data->number_samples) ;
   fprintf (pfile, "[#CLOCKS]\n") ;
   fprintf (pfile, "[#SIMULATION_DATA]\n") ;
@@ -697,6 +732,7 @@ simulation_data *simulation_data_unserialize (FILE *pfile)
   sim_data = g_malloc0 (sizeof (simulation_data)) ;
   sim_data->number_samples = -1 ;
   sim_data->number_of_traces = -1 ;
+  sim_data->number_of_zones = 4 ;
 
   while (TRUE)
     {
@@ -716,6 +752,9 @@ simulation_data *simulation_data_unserialize (FILE *pfile)
     else
     if (!strcmp (pszLine, "number_of_traces"))
       sim_data->number_of_traces = atoi (pszValue) ;
+    else
+    if (!strcmp (pszLine, "number_of_zones"))
+      sim_data->number_of_zones = atoi (pszValue) ;
     else
     if (!strncmp (pszLine, "[TRACES]", 8))
       {
@@ -744,8 +783,8 @@ simulation_data *simulation_data_unserialize (FILE *pfile)
         }
       else
         {
-        sim_data->clock_data = g_malloc0 (4 * sizeof (struct TRACEDATA)) ;
-        for (idxTrace = 0 ; idxTrace < 4 ; idxTrace++)
+        sim_data->clock_data = g_malloc0 (sim_data->number_of_zones * sizeof (struct TRACEDATA)) ;
+        for (idxTrace = 0 ; idxTrace < sim_data->number_of_zones ; idxTrace++)
           unserialize_trace (pfile, &(sim_data->clock_data[idxTrace]), sim_data->number_samples) ;
         }
       }
