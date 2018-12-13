@@ -141,7 +141,16 @@ batch_sim-generic_utils.o: generic_utils.c /usr/include/stdc-predef.h \
  /usr/include/glib-2.0/gobject/gtypeplugin.h \
  /usr/include/glib-2.0/gobject/gvaluearray.h \
  /usr/include/glib-2.0/gobject/gvaluetypes.h \
- /usr/include/glib-2.0/gobject/gobject-autocleanups.h global_consts.h
+ /usr/include/glib-2.0/gobject/gobject-autocleanups.h design.h \
+ objects/object_helpers.h objects/../gdk_structs.h objects/../hsl2rgb.h \
+ objects/../gdk_structs.h objects/QCADCell.h \
+ /usr/lib/gcc/x86_64-linux-gnu/5/include/stdint.h /usr/include/stdint.h \
+ /usr/include/x86_64-linux-gnu/bits/wchar.h objects/../exp_array.h \
+ objects/QCADDesignObject.h objects/mouse_handler_struct.h \
+ objects/object_helpers.h objects/QCADLabel.h \
+ objects/QCADStretchyObject.h objects/QCADUndoEntry.h \
+ objects/QCADDesignObject.h objects/QCADSubstrate.h objects/QCADLayer.h \
+ global_consts.h
 
 /usr/include/stdc-predef.h:
 
@@ -494,5 +503,43 @@ generic_utils.h:
 /usr/include/glib-2.0/gobject/gvaluetypes.h:
 
 /usr/include/glib-2.0/gobject/gobject-autocleanups.h:
+
+design.h:
+
+objects/object_helpers.h:
+
+objects/../gdk_structs.h:
+
+objects/../hsl2rgb.h:
+
+objects/../gdk_structs.h:
+
+objects/QCADCell.h:
+
+/usr/lib/gcc/x86_64-linux-gnu/5/include/stdint.h:
+
+/usr/include/stdint.h:
+
+/usr/include/x86_64-linux-gnu/bits/wchar.h:
+
+objects/../exp_array.h:
+
+objects/QCADDesignObject.h:
+
+objects/mouse_handler_struct.h:
+
+objects/object_helpers.h:
+
+objects/QCADLabel.h:
+
+objects/QCADStretchyObject.h:
+
+objects/QCADUndoEntry.h:
+
+objects/QCADDesignObject.h:
+
+objects/QCADSubstrate.h:
+
+objects/QCADLayer.h:
 
 global_consts.h:

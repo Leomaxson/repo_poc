@@ -567,7 +567,7 @@ graph_dialog-print_graph_properties_dialog.o: \
  objects/QCADUndoEntry.h objects/QCADDesignObject.h \
  objects/QCADSubstrate.h objects/QCADLayer.h vector_table.h \
  objects/QCADPrintDialog.h print_graph_properties_dialog.h print.h \
- print_preview.h
+ objects/QCADPrintDialog.h print_preview.h
 
 /usr/include/stdc-predef.h:
 
@@ -1870,5 +1870,7 @@ objects/QCADPrintDialog.h:
 print_graph_properties_dialog.h:
 
 print.h:
+
+objects/QCADPrintDialog.h:
 
 print_preview.h:

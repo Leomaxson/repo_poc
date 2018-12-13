@@ -22,9 +22,9 @@ QCADesigner-print_util.o: print_util.c /usr/include/stdc-predef.h \
  /usr/include/x86_64-linux-gnu/bits/nan.h \
  /usr/include/x86_64-linux-gnu/bits/mathdef.h \
  /usr/include/x86_64-linux-gnu/bits/mathcalls.h \
- /usr/include/x86_64-linux-gnu/bits/mathinline.h \
- /usr/include/glib-2.0/glib.h /usr/include/glib-2.0/glib/galloca.h \
- /usr/include/glib-2.0/glib/gtypes.h \
+ /usr/include/x86_64-linux-gnu/bits/mathinline.h print.h simulation.h \
+ simulation_data.h design.h exp_array.h /usr/include/glib-2.0/glib.h \
+ /usr/include/glib-2.0/glib/galloca.h /usr/include/glib-2.0/glib/gtypes.h \
  /usr/lib/x86_64-linux-gnu/glib-2.0/include/glibconfig.h \
  /usr/include/glib-2.0/glib/gmacros.h \
  /usr/lib/gcc/x86_64-linux-gnu/5/include-fixed/limits.h \
@@ -114,8 +114,7 @@ QCADesigner-print_util.o: print_util.c /usr/include/stdc-predef.h \
  /usr/include/x86_64-linux-gnu/sys/sysmacros.h /usr/include/pthread.h \
  /usr/include/sched.h /usr/include/x86_64-linux-gnu/bits/sched.h \
  /usr/include/x86_64-linux-gnu/bits/setjmp.h \
- /usr/include/glib-2.0/glib/glib-autocleanups.h print.h simulation.h \
- simulation_data.h design.h exp_array.h objects/object_helpers.h \
+ /usr/include/glib-2.0/glib/glib-autocleanups.h objects/object_helpers.h \
  /usr/include/gtk-2.0/gtk/gtk.h /usr/include/gtk-2.0/gdk/gdk.h \
  /usr/include/gtk-2.0/gdk/gdkapplaunchcontext.h \
  /usr/include/glib-2.0/gio/gio.h /usr/include/glib-2.0/gio/giotypes.h \
@@ -574,7 +573,7 @@ QCADesigner-print_util.o: print_util.c /usr/include/stdc-predef.h \
  objects/object_helpers.h objects/QCADUndoEntry.h objects/QCADLabel.h \
  objects/../exp_pixmap.h objects/QCADStretchyObject.h \
  objects/QCADDesignObject.h objects/QCADSubstrate.h objects/QCADLayer.h \
- vector_table.h objects/QCADPrintDialog.h print_util.h
+ vector_table.h objects/QCADPrintDialog.h
 
 /usr/include/stdc-predef.h:
 
@@ -633,6 +632,16 @@ QCADesigner-print_util.o: print_util.c /usr/include/stdc-predef.h \
 /usr/include/x86_64-linux-gnu/bits/mathcalls.h:
 
 /usr/include/x86_64-linux-gnu/bits/mathinline.h:
+
+print.h:
+
+simulation.h:
+
+simulation_data.h:
+
+design.h:
+
+exp_array.h:
 
 /usr/include/glib-2.0/glib.h:
 
@@ -859,16 +868,6 @@ QCADesigner-print_util.o: print_util.c /usr/include/stdc-predef.h \
 /usr/include/x86_64-linux-gnu/bits/setjmp.h:
 
 /usr/include/glib-2.0/glib/glib-autocleanups.h:
-
-print.h:
-
-simulation.h:
-
-simulation_data.h:
-
-design.h:
-
-exp_array.h:
 
 objects/object_helpers.h:
 
@@ -1889,5 +1888,3 @@ objects/QCADLayer.h:
 vector_table.h:
 
 objects/QCADPrintDialog.h:
-
-print_util.h:

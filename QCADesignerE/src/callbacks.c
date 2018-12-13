@@ -65,7 +65,6 @@
 #include "qcadstock.h"
 #include "objects/QCADClockCombo.h"
 #include "generic_utils.h"
-#include "print_util.h"
 
 // dialogs and windows used //
 #include "about.h"

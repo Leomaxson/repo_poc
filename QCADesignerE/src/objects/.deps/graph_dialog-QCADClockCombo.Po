@@ -573,7 +573,7 @@ objects/graph_dialog-QCADClockCombo.o: objects/QCADClockCombo.c \
  objects/../objects/QCADStretchyObject.h \
  objects/../objects/QCADUndoEntry.h objects/../objects/QCADDesignObject.h \
  objects/../objects/QCADSubstrate.h objects/../objects/QCADLayer.h \
- objects/../vector_table.h objects/../objects/QCADPrintDialog.h
+ objects/../vector_table.h objects/.././objects/QCADPrintDialog.h
 
 /usr/include/stdc-predef.h:
 
@@ -1889,4 +1889,4 @@ objects/../objects/QCADLayer.h:
 
 objects/../vector_table.h:
 
-objects/../objects/QCADPrintDialog.h:
+objects/.././objects/QCADPrintDialog.h:

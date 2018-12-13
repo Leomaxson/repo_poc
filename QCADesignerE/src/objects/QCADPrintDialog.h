@@ -32,11 +32,11 @@
 #ifndef _OBJECTS_QCADPrintDialog_H_
 #define _OBJECTS_QCADPrintDialog_H_
 
-#include <gtk/gtk.h>
-
 #ifdef __cplusplus
 extern "C" {
 #endif /* __cplusplus */
+    
+#include <gtk/gtk.h>
 
 typedef enum
   {

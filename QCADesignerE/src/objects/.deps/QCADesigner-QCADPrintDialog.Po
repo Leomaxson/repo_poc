@@ -558,7 +558,19 @@ objects/QCADesigner-QCADPrintDialog.o: objects/QCADPrintDialog.c \
  /usr/include/gtk-2.0/gtk/gtkoptionmenu.h \
  /usr/include/gtk-2.0/gtk/gtkpreview.h \
  /usr/include/gtk-2.0/gtk/gtktipsquery.h objects/QCADPrintDialog.h \
- objects/../generic_utils.h objects/../file_selection_window.h \
+ objects/../generic_utils.h objects/../design.h objects/../exp_array.h \
+ objects/../objects/object_helpers.h objects/../objects/../hsl2rgb.h \
+ objects/../objects/QCADCell.h \
+ /usr/lib/gcc/x86_64-linux-gnu/5/include/stdint.h /usr/include/stdint.h \
+ /usr/include/x86_64-linux-gnu/bits/wchar.h \
+ objects/../objects/../gdk_structs.h objects/../objects/../exp_array.h \
+ objects/../objects/QCADDesignObject.h \
+ objects/../objects/mouse_handler_struct.h \
+ objects/../objects/object_helpers.h objects/../objects/QCADUndoEntry.h \
+ objects/../objects/QCADLabel.h objects/../objects/../exp_pixmap.h \
+ objects/../objects/QCADStretchyObject.h \
+ objects/../objects/QCADDesignObject.h objects/../objects/QCADSubstrate.h \
+ objects/../objects/QCADLayer.h objects/../file_selection_window.h \
  objects/../support.h /usr/include/libintl.h /usr/include/locale.h \
  /usr/include/x86_64-linux-gnu/bits/locale.h
 
@@ -1817,6 +1829,46 @@ objects/QCADesigner-QCADPrintDialog.o: objects/QCADPrintDialog.c \
 objects/QCADPrintDialog.h:
 
 objects/../generic_utils.h:
+
+objects/../design.h:
+
+objects/../exp_array.h:
+
+objects/../objects/object_helpers.h:
+
+objects/../objects/../hsl2rgb.h:
+
+objects/../objects/QCADCell.h:
+
+/usr/lib/gcc/x86_64-linux-gnu/5/include/stdint.h:
+
+/usr/include/stdint.h:
+
+/usr/include/x86_64-linux-gnu/bits/wchar.h:
+
+objects/../objects/../gdk_structs.h:
+
+objects/../objects/../exp_array.h:
+
+objects/../objects/QCADDesignObject.h:
+
+objects/../objects/mouse_handler_struct.h:
+
+objects/../objects/object_helpers.h:
+
+objects/../objects/QCADUndoEntry.h:
+
+objects/../objects/QCADLabel.h:
+
+objects/../objects/../exp_pixmap.h:
+
+objects/../objects/QCADStretchyObject.h:
+
+objects/../objects/QCADDesignObject.h:
+
+objects/../objects/QCADSubstrate.h:
+
+objects/../objects/QCADLayer.h:
 
 objects/../file_selection_window.h:
 

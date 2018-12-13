@@ -32,7 +32,7 @@
 #define _PRINT_H_
 
 #include "simulation.h"
-#include "objects/QCADPrintDialog.h"
+#include "./objects/QCADPrintDialog.h"
 #include "design.h"
 
 typedef struct

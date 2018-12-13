@@ -593,8 +593,8 @@ QCADesigner-callbacks.o: callbacks.c /usr/include/stdc-predef.h \
  objects/QCADUndoEntryGroup.h objects/QCADRuler.h \
  actions/action_handlers.h actions/pan.h actions/array.h actions/select.h \
  actions/../objects/QCADDesignObject.h actions/rotate.h global_consts.h \
- qcadstock.h objects/QCADClockCombo.h generic_utils.h print_util.h \
- about.h file_selection_window.h scale_dialog.h print_properties_dialog.h \
+ qcadstock.h objects/QCADClockCombo.h generic_utils.h about.h \
+ file_selection_window.h scale_dialog.h print_properties_dialog.h \
  sim_engine_setup_dialog.h graph_dialog.h graph_dialog_interface.h \
  graph_dialog_data.h bus_layout_dialog.h custom_widgets.h \
  layer_properties_dialog.h layer_order_dialog.h \
@@ -2006,8 +2006,6 @@ qcadstock.h:
 objects/QCADClockCombo.h:
 
 generic_utils.h:
-
-print_util.h:
 
 about.h:
 

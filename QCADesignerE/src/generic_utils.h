@@ -32,8 +32,11 @@
 
 #include <glib-object.h>
 #include <glib.h>
+#include "design.h"
 
+/* Constants */
 #define MAX_SLOPE_DIFF 0.1
+#define NUMBER_OF_CLOCKS_DEFAULT     (4)
 
 // General-purpose function to scale one rectangle until it is inscribed in another rectangle
 void fit_rect_inside_rect (double dWidth, double dHeight, double *px, double *py, double *pdRectWidth, double *pdRectHeight) ;
@@ -44,5 +47,14 @@ void RunCmdLineAsync (char *pszCmdLine, char *pszTmpFName) ;
 #endif /* def GTK_GUI */
 char *get_enum_string_from_value (GType enum_type, int value) ;
 int get_enum_value_from_string (GType enum_type, char *psz) ;
+
+/* Exported functions */
+void setNumberOfClocks(int nClocks);
+int getNumberOfClocks(void);
+int getNumberOfMetaClocks(void);
+int getNumberOfTotalClocks(void);
+double getParameterB(int clock, int numberOfClocks);
+int numberOfClocksUsed(DESIGN *design);
+void updateNumberOfClocksUsed(DESIGN *design, int oldNumberOfClocks);
 
 #endif /* _GENERIC_UTILS_H_ */
