@@ -42,6 +42,7 @@
 #include "bistable_simulation.h"
 #include "custom_widgets.h"
 #include "global_consts.h"
+#include "generic_utils.h"
 
 //#define REDUCE_DEREF
 
@@ -185,12 +186,13 @@ simulation_data *run_bistable_simulation (int SIMULATION_TYPE, DESIGN *design, b
     }
 
   // create and initialize the clock data //
-  sim_data->clock_data = g_malloc0 (sizeof (struct TRACEDATA) * 4);
+  sim_data->number_of_zones = getNumberOfTotalClocks();
+  sim_data->clock_data = g_malloc0 (sizeof (struct TRACEDATA) * sim_data->number_of_zones);
 
-  for (i = 0; i < 4; i++)
+  for (i = 0; i < sim_data->number_of_zones; i++)
     {
     sim_data->clock_data[i].data_labels = g_strdup_printf ("CLOCK %d", i);
-    sim_data->clock_data[i].drawtrace = 1;
+    sim_data->clock_data[i].drawtrace = TRUE;
     sim_data->clock_data[i].trace_function = QCAD_CELL_FIXED; // Abusing the notation here
 
     sim_data->clock_data[i].data = g_malloc0 (sizeof (double) * sim_data->number_samples);
@@ -198,14 +200,24 @@ simulation_data *run_bistable_simulation (int SIMULATION_TYPE, DESIGN *design, b
     if (SIMULATION_TYPE == EXHAUSTIVE_VERIFICATION)
       for (j = 0; j < sim_data->number_samples; j++)
         {
-        sim_data->clock_data[i].data[j] = clock_prefactor * cos (((double)(1 << design->bus_layout->inputs->icUsed)) * (double) j * four_pi_over_number_samples - PI * i / 2) + clock_shift ;
+        sim_data->clock_data[i].data[j] = 8.0 * cos (((double)(1 << design->bus_layout->inputs->icUsed)) * (double) j * four_pi_over_number_samples - PI * (double)(i/getNumberOfClocks()) * 0.75);
+        sim_data->clock_data[i].data[j]+= getParameterB(i % getNumberOfClocks(),getNumberOfClocks());
+        sim_data->clock_data[i].data[j] = CLAMP(sim_data->clock_data[i].data[j],-1.0,1.0)+1.0;
+        sim_data->clock_data[i].data[j]/= 2.0;
+        sim_data->clock_data[i].data[j]*= (options->clock_high - options->clock_low);
+        sim_data->clock_data[i].data[j]+= options->clock_low;
         sim_data->clock_data[i].data[j] = CLAMP (sim_data->clock_data[i].data[j], options->clock_low, options->clock_high) ;
         }
     else
 //    if (SIMULATION_TYPE == VECTOR_TABLE)
       for (j = 0; j < sim_data->number_samples; j++)
         {
-        sim_data->clock_data[i].data[j] = clock_prefactor * cos (((double)pvt->vectors->icUsed) * (double)j * two_pi_over_number_samples - PI * i / 2) + clock_shift ;
+        sim_data->clock_data[i].data[j] = 8.0 * cos (((double)(1 << design->bus_layout->inputs->icUsed)) * (double) j * two_pi_over_number_samples - PI * (double)(i/getNumberOfClocks()) * 0.75);
+        sim_data->clock_data[i].data[j]+= getParameterB(i % getNumberOfClocks(),getNumberOfClocks());
+        sim_data->clock_data[i].data[j] = CLAMP(sim_data->clock_data[i].data[j],-1.0,1.0)+1.0;
+        sim_data->clock_data[i].data[j]/= 2.0;
+        sim_data->clock_data[i].data[j]*= (options->clock_high - options->clock_low);
+        sim_data->clock_data[i].data[j]+= options->clock_low;
         sim_data->clock_data[i].data[j] = CLAMP (sim_data->clock_data[i].data[j], options->clock_low, options->clock_high) ;
         }
     }
