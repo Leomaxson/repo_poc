@@ -50,6 +50,7 @@
 #include "object_helpers.h"
 #include "objects_debug.h"
 #include "../fileio_helpers.h"
+#include "generic_utils.h"
 
 #define QCAD_CELL_LABEL_DEFAULT_OFFSET_Y 1
 
@@ -81,6 +82,11 @@ typedef struct
   GtkWidget *fmIO ;
   GtkWidget *cbClock ;
   GtkWidget *chkignore_energy ;
+//Sardinha
+  GtkAdjustment *adjRelax ;
+  GtkAdjustment *adjRelax_in ;	
+  GtkWidget *spnRelax ;
+//EndMod
   } PROPERTIES ;
 #endif /* def GTK_GUI */
 
@@ -149,12 +155,28 @@ GdkColor clrYellow = {0, 0xFFFF, 0xFFFF, 0x0000} ;
 GdkColor clrBlue   = {0, 0x0000, 0x0000, 0xFFFF} ;
 GdkColor clrPurple = {0, 0x8FFF, 0x0000, 0x8FFF} ;
 
-static GdkColor clrClock[4] =
+static GdkColor clrClock[] =
   {
-  {0, 0x0000, 0xFFFF, 0x0000},
-  {0, 0xFFFF, 0x0000, 0xFFFF},
-  {0, 0x0000, 0xFFFF, 0xFFFF},
-  {0, 0xFFFF, 0xFFFF, 0xFFFF},
+  {0, 0x0000, 0xFFFF, 0x0000}, // Verde 1
+  {0, 0xFFFF, 0x0000, 0xFFFF}, // Vermelho 1
+  {0, 0x0000, 0xFFFF, 0xFFFF}, // Azul 1
+  {0, 0xFFFF, 0xFFFF, 0xFFFF}, // Branco 1
+  {0, 0x5CFF, 0x8FFF, 0x05FF}, // Verde 2
+  {0, 0xB8FF, 0x14FF, 0xB8FF}, // Vermelho 2
+  {0, 0x25FF, 0x97FF, 0xB1FF}, // Azul 2
+  {0, 0xDDFF, 0xDDFF, 0xDDFF}, // Branco 2
+  {0, 0x92FF, 0xDFFF, 0x9EFF}, // Verde 3
+  {0, 0xCCFF, 0x33FF, 0xCCFF}, // Vermelho 3
+  {0, 0x29FF, 0x66FF, 0xA3FF}, // Azul 3
+  {0, 0xAAFF, 0xAAFF, 0xAAFF}, // Branco 3
+  {0, 0x70FF, 0xC2FF, 0x99FF}, // Verde 4
+  {0, 0xD5FF, 0x5D00, 0xD500}, // Vermelho 4
+  {0, 0x8CFF, 0x8CFF, 0xD9FF}, // Azul 4
+  {0, 0x99FF, 0x99FF, 0x99FF}, // Branco 4
+  {0, 0xB3FF, 0xE6FF, 0xCCFF}, // Verde 5
+  {0, 0xE0FF, 0xB8FF, 0xE0FF}, // Vermelho 5
+  {0, 0xA8FF, 0xCCFF, 0xF0FF}, // Azul 5
+  {0, 0x77FF, 0x77FF, 0x77FF}  // Branco 5
   } ;
 
 enum
@@ -167,6 +189,10 @@ enum
   {
   QCAD_CELL_PROPERTY_FUNCTION = 1,
   QCAD_CELL_PROPERTY_CLOCK,
+//Mod by Sardinha
+  QCAD_CELL_PROPERTY_RELAX,
+  QCAD_CELL_PROPERTY_RELAX_IN,
+//EndMod
   QCAD_CELL_PROPERTY_MODE,
   QCAD_CELL_PROPERTY_LABEL,
   QCAD_CELL_PROPERTY_POLARIZATION,
@@ -420,7 +446,14 @@ static void qcad_cell_get_property (GObject *object, guint property_id, GValue *
     case QCAD_CELL_PROPERTY_CLOCK:
       g_value_set_uint (value, cell->cell_options.clock) ;
       break ;
-
+//Mod By Sardinha
+    case QCAD_CELL_PROPERTY_RELAX:
+      g_value_set_uint (value, cell->cell_options.relax_cycles) ;
+      break ;
+    case QCAD_CELL_PROPERTY_RELAX_IN:
+      g_value_set_uint (value, cell->cell_options.relax_in) ;
+      break ;
+//EndMod
     case QCAD_CELL_PROPERTY_MODE:
       g_value_set_enum (value, cell->cell_options.mode) ;
       break ;
@@ -438,8 +471,6 @@ static void qcad_cell_get_property (GObject *object, guint property_id, GValue *
       break ;
     
     }
-    
-    
   }
 
 static void qcad_cell_instance_init (GObject *object, gpointer data)
@@ -449,10 +480,11 @@ static void qcad_cell_instance_init (GObject *object, gpointer data)
   DBG_OO (fprintf (stderr, "QCADCell::instance_init:Entering\n")) ;
 
   memcpy (&(QCAD_CELL (object)->cell_options), &(klass->default_cell_options), sizeof (QCADCellOptions)) ;
-  memcpy (&(QCAD_DESIGN_OBJECT (object)->clr), &(clrClock[klass->default_cell_options.clock]), sizeof (GdkColor)) ;
-  QCAD_CELL (object)->id = (int)object ;
+  memcpy (&(QCAD_DESIGN_OBJECT (object)->clr), &(clrClock[(klass->default_cell_options.clock)%getNumberOfClocks()]), sizeof (GdkColor)) ;
+  QCAD_CELL (object)->id = (uintptr_t)object ;
   QCAD_CELL (object)->host_name = NULL ;
   QCAD_CELL (object)->cell_function = QCAD_CELL_NORMAL ;
+  QCAD_CELL (object)->old_cell_function = QCAD_CELL_NULL ;
   QCAD_CELL (object)->cell_model = NULL ;
   QCAD_CELL (object)->cell_dots = malloc (4 * sizeof (QCADCellDot)) ;
   QCAD_CELL (object)->number_of_dots = 4 ;
@@ -554,7 +586,7 @@ void qcad_cell_drexp_array (GdkDrawable *dst, GdkFunction rop, GtkOrientation or
   length[1] = klass->default_cell_options.cyCell ;
 
   gdk_gc_set_function (gc, rop) ;
-  gdk_gc_set_foreground (gc, &(clrClock[QCAD_CELL_CLASS (klass)->default_cell_options.clock])) ;
+  gdk_gc_set_foreground (gc, &(clrClock[(QCAD_CELL_CLASS (klass)->default_cell_options.clock)&3])) ;
 
   coord[idx[0]] = dRangeBeg ;
   coord[idx[1]] = dOtherCoord ;
@@ -781,15 +813,15 @@ static char *PostScript_instance (QCADDesignObject *obj, gboolean bColour)
 
   if (QCAD_CELL_NORMAL == cell->cell_function)
     {
-    fclr[0] = fclrClock[cell->cell_options.clock][bColour ? 0 : 1][0] ;
-    fclr[1] = fclrClock[cell->cell_options.clock][bColour ? 0 : 1][1] ;
-    fclr[2] = fclrClock[cell->cell_options.clock][bColour ? 0 : 1][2] ;
+    fclr[0] = fclrClock[(cell->cell_options.clock)&3][bColour ? 0 : 1][0] ;
+    fclr[1] = fclrClock[(cell->cell_options.clock)&3][bColour ? 0 : 1][1] ;
+    fclr[2] = fclrClock[(cell->cell_options.clock)&3][bColour ? 0 : 1][2] ;
     }
    else
     {
-    fclr[0] = bColour ? fclrCellFunction[cell->cell_function][0] : fclrClock[cell->cell_options.clock][1][0] ;
-    fclr[1] = bColour ? fclrCellFunction[cell->cell_function][1] : fclrClock[cell->cell_options.clock][1][1] ;
-    fclr[2] = bColour ? fclrCellFunction[cell->cell_function][2] : fclrClock[cell->cell_options.clock][1][2] ;
+    fclr[0] = bColour ? fclrCellFunction[cell->cell_function][0] : fclrClock[(cell->cell_options.clock)&3][1][0] ;
+    fclr[1] = bColour ? fclrCellFunction[cell->cell_function][1] : fclrClock[(cell->cell_options.clock)&3][1][1] ;
+    fclr[2] = bColour ? fclrCellFunction[cell->cell_function][2] : fclrClock[(cell->cell_options.clock)&3][1][2] ;
     }
 
   if (NULL != cell->label)
@@ -1189,6 +1221,10 @@ static void serialize (QCADDesignObject *obj, FILE *fp)
   fprintf(fp, "cell_options.cyCell=%lf\n", cell->cell_options.cyCell);
   fprintf(fp, "cell_options.dot_diameter=%lf\n", cell->cell_options.dot_diameter);
   fprintf(fp, "cell_options.clock=%d\n", cell->cell_options.clock);
+//Sardinha
+  fprintf(fp, "cell_options.relax=%d\n", cell->cell_options.relax_cycles);
+  fprintf(fp, "cell_options.relax_in=%d\n", cell->cell_options.relax_in);
+//EndMod
   fprintf(fp, "cell_options.mode=%s\n", psz = get_enum_string_from_value (QCAD_TYPE_CELL_MODE, cell->cell_options.mode));
   fprintf(fp, "cell_options.ignore_energy=%s\n", cell->cell_options.ignore_energy?"TRUE":"FALSE");
   g_free (psz) ;
@@ -1704,8 +1740,6 @@ void qcad_cell_set_function (QCADCell *cell, QCADCellFunction function)
       memcpy (&(QCAD_DESIGN_OBJECT (cell->label)->clr), (QCAD_CELL_INPUT == function) ? &clrBlue : &clrYellow, sizeof (GdkColor)) ;
     }  
 
-  
-
   if (NULL != cell->label)
     qcad_design_object_set_selected (QCAD_DESIGN_OBJECT (cell->label), QCAD_DESIGN_OBJECT (cell)->bSelected) ;
 
@@ -1763,7 +1797,7 @@ void qcad_cell_set_clock (QCADCell *cell, int iClock)
   {
   cell->cell_options.clock = iClock ;
   if (QCAD_CELL_NORMAL == cell->cell_function)
-    memcpy (&(QCAD_DESIGN_OBJECT (cell)->clr), &(clrClock[iClock]), sizeof (GdkColor)) ;
+    memcpy (&(QCAD_DESIGN_OBJECT (cell)->clr), &(clrClock[iClock % getNumberOfClocks()]), sizeof (GdkColor)) ;
   }
   
 void qcad_cell_set_label (QCADCell *cell, char *pszLabel)
