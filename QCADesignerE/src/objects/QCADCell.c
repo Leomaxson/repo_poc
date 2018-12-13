@@ -300,13 +300,12 @@ static void qcad_cell_do_container_interface_init (gpointer iface, gpointer inte
   klass->add = qcad_cell_do_container_add ;
   klass->remove = qcad_cell_do_container_remove ;
   }
-
-static void qcad_cell_class_init (GObjectClass *klass, gpointer data)
-  {
+  
 #ifdef GTK_GUI
+static void qcad_cell_class_colorMap(void) {
+    
   GdkColormap *clrmap = gdk_colormap_get_system () ;
-
-  DBG_OO (fprintf (stderr, "QCADCell::class_init:Entering\n")) ;
+  int i;
 
   if (0 == clrOrange.pixel)
     gdk_colormap_alloc_color (clrmap, &clrOrange, FALSE, TRUE) ;
@@ -319,12 +318,19 @@ static void qcad_cell_class_init (GObjectClass *klass, gpointer data)
   if (0 == clrPurple.pixel)
     gdk_colormap_alloc_color (clrmap, &clrPurple, FALSE, TRUE) ;
 
-  gdk_colormap_alloc_color (clrmap, &(clrClock[0]), FALSE, TRUE) ;
-  gdk_colormap_alloc_color (clrmap, &(clrClock[1]), FALSE, TRUE) ;
-  gdk_colormap_alloc_color (clrmap, &(clrClock[2]), FALSE, TRUE) ;
-  gdk_colormap_alloc_color (clrmap, &(clrClock[3]), FALSE, TRUE) ;
-#else
+  for(i=0; i < (sizeof(clrClock) / sizeof(GdkColor)); i++) {
+    gdk_colormap_alloc_color (clrmap, &(clrClock[i]), FALSE, TRUE) ;
+  }
+}
+#endif // #GTK_GUI
+
+static void qcad_cell_class_init (GObjectClass *klass, gpointer data)
+  {
   DBG_OO (fprintf (stderr, "QCADCell::class_init:Entering\n")) ;
+
+#ifdef GTK_GUI
+  GdkColormap *clrmap = gdk_colormap_get_system () ;
+  qcad_cell_class_colorMap();
 #endif /* def GTK_GUI */
 
   memcpy (&(QCAD_DESIGN_OBJECT_CLASS (klass)->clrDefault), &(clrClock[0]), sizeof (GdkColor)) ;
@@ -354,6 +360,13 @@ static void qcad_cell_class_init (GObjectClass *klass, gpointer data)
   QCAD_CELL_CLASS (klass)->default_cell_options.cyCell         = 18 ;
   QCAD_CELL_CLASS (klass)->default_cell_options.dot_diameter   =  5 ;
   QCAD_CELL_CLASS (klass)->default_cell_options.mode           = QCAD_CELL_MODE_NORMAL ;
+//Sardinha
+  QCAD_CELL_CLASS (klass)->default_cell_options.relax_in       = 1 ;
+  QCAD_CELL_CLASS (klass)->default_cell_options.relax_in_count = 0 ;
+  QCAD_CELL_CLASS (klass)->default_cell_options.relax_cycles   = 1 ;
+  QCAD_CELL_CLASS (klass)->default_cell_options.relax_count    = 0 ;
+  QCAD_CELL_CLASS (klass)->default_cell_options.already_low    = FALSE ;
+//EndMod
   QCAD_CELL_CLASS (klass)->default_cell_options.ignore_energy  = FALSE ;
   G_OBJECT_CLASS (klass)->finalize                             = qcad_cell_instance_finalize ;
   G_OBJECT_CLASS (klass)->set_property                         = qcad_cell_set_property ;
@@ -365,7 +378,17 @@ static void qcad_cell_class_init (GObjectClass *klass, gpointer data)
 
   g_object_class_install_property (G_OBJECT_CLASS (klass), QCAD_CELL_PROPERTY_CLOCK,
     g_param_spec_uint ("clock", _("Clock"), _("Cell Clock"),
-      0, 3, 0, G_PARAM_READABLE | G_PARAM_WRITABLE)) ;
+      0, 9999999, 0, G_PARAM_READABLE | G_PARAM_WRITABLE)) ;
+
+//Mod by Sardinha
+  g_object_class_install_property (G_OBJECT_CLASS (klass), QCAD_CELL_PROPERTY_RELAX,
+    g_param_spec_uint ("relax", _("Relax"), _("Relax Mode"),
+      1, MAX_CLOCK_RELAX, 1, G_PARAM_READABLE | G_PARAM_WRITABLE)) ;
+
+  g_object_class_install_property (G_OBJECT_CLASS (klass), QCAD_CELL_PROPERTY_RELAX_IN,
+    g_param_spec_uint ("relax_in", _("Relax_in"), _("Relax In"),
+      1, MAX_CLOCK_RELAX, 1, G_PARAM_READABLE | G_PARAM_WRITABLE)) ;
+//EndMod
 
   g_object_class_install_property (G_OBJECT_CLASS (klass), QCAD_CELL_PROPERTY_MODE,
     g_param_spec_enum ("mode", _("Mode"), _("Cell Drawing Mode"),
@@ -407,6 +430,16 @@ static void qcad_cell_set_property (GObject *object, guint property_id, const GV
       qcad_cell_set_clock (cell, g_value_get_uint (value)) ;
       DBG_VAL (fprintf (stderr, "qcad_cell_set_property:Setting cell clock to %d\n", g_value_get_uint (value))) ;
       break ;
+//Mod by Sardinha
+    case QCAD_CELL_PROPERTY_RELAX:
+      cell->cell_options.relax_cycles = g_value_get_uint (value);
+      DBG_VAL (fprintf (stderr, "qcad_cell_set_property:Setting cell relax cycles to %d\n", g_value_get_uint (value))) ;
+      break ;
+    case QCAD_CELL_PROPERTY_RELAX_IN:
+      cell->cell_options.relax_in = g_value_get_uint (value);
+      DBG_VAL (fprintf (stderr, "qcad_cell_set_property:Setting cell relax_in cycles to %d\n", g_value_get_uint (value))) ;
+      break ;
+//EndMod
 
     case QCAD_CELL_PROPERTY_MODE:
       qcad_cell_set_display_mode (cell, g_value_get_enum (value)) ;
@@ -1173,6 +1206,15 @@ static gboolean unserialize (QCADDesignObject *obj, FILE *fp)
       if (!strcmp (pszLine, "cell_options.clock"))
         cell->cell_options.clock = g_ascii_strtod (pszValue, NULL) ;
       else
+	  //Mod By Sardinha	
+      if (!strcmp (pszLine, "cell_options.relax")){
+        cell->cell_options.relax_cycles = g_ascii_strtod (pszValue, NULL) ;
+	  }
+      else
+      if (!strcmp (pszLine, "cell_options.relax_in")){
+        cell->cell_options.relax_in = g_ascii_strtod (pszValue, NULL) ;
+	  }
+      else 
       if (!strcmp (pszLine, "cell_options.ignore_energy"))
         cell->cell_options.ignore_energy = !strcmp (pszValue, "TRUE") ? TRUE:FALSE;
       else
@@ -1285,6 +1327,8 @@ static gboolean properties (QCADDesignObject *obj, GtkWidget *widget)
   static PROPERTIES dialog = {NULL} ;
   QCADCell *cell = QCAD_CELL (obj) ;
   int iClock = -1 ;
+  int iStat = -1;
+  int iStatIn = -1;
   gboolean ignore_energy = FALSE;
   GtkWidget *tbtn = NULL ;
   gboolean bRet = FALSE ;
@@ -1292,12 +1336,18 @@ static gboolean properties (QCADDesignObject *obj, GtkWidget *widget)
   EXP_ARRAY *state_before = NULL ;
 #endif /* def UNDO_REDO */
 
-  if (NULL == dialog.dlg)
+  if (NULL == dialog.dlg) {
     create_properties_dialog (&dialog) ;
+  }
 
   gtk_window_set_transient_for (GTK_WINDOW (dialog.dlg), GTK_WINDOW (widget)) ;
   g_object_set_data (G_OBJECT (dialog.dlg), "dialog", &dialog) ;
   gtk_adjustment_set_value (GTK_ADJUSTMENT (dialog.adjPolarization), qcad_cell_calculate_polarization (QCAD_CELL (obj))) ;
+//Mod Sardinha
+  command_history_message("Cell Relax Stat: %d (On %d to reset every %d)\n", cell->cell_options.relax_count,cell->cell_options.relax_in_count ,cell->cell_options.relax_in);
+  gtk_adjustment_set_value (GTK_ADJUSTMENT (dialog.adjRelax), cell->cell_options.relax_cycles) ;
+  gtk_adjustment_set_value (GTK_ADJUSTMENT (dialog.adjRelax_in), cell->cell_options.relax_in) ;
+//EndMod
   gtk_entry_set_text (GTK_ENTRY (dialog.txtName), NULL == cell->label ? "" : NULL == cell->label->psz ? "" : cell->label->psz) ;
 
   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (tbtn =
@@ -1319,15 +1369,21 @@ static gboolean properties (QCADDesignObject *obj, GtkWidget *widget)
     {
 #ifdef UNDO_REDO
     if (NULL != pentry)
-      state_before = qcad_design_object_get_state_array (obj, "function", "label", "polarization", "clock", "ignore_energy", NULL) ;
+      state_before = qcad_design_object_get_state_array (obj, "function", "label", "polarization", "clock", "relax", "relax_in", "ignore_energy", NULL) ;
 #endif /* def UNDO_REDO */
     iClock = qcad_clock_combo_get_clock (QCAD_CLOCK_COMBO (dialog.cbClock)) ;
+//Mod By Sardinha
+// This integer picks the current # of relaxed clocks.
+    iStat = gtk_adjustment_get_value (GTK_ADJUSTMENT (dialog.adjRelax));
+    iStatIn = gtk_adjustment_get_value (GTK_ADJUSTMENT (dialog.adjRelax_in));
     ignore_energy = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (dialog.chkignore_energy)) ;
     
     if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (dialog.rbNormal)))
       g_object_set (G_OBJECT (cell),
         "function",     QCAD_CELL_NORMAL,
         "clock",        iClock,
+        "relax",        iStat,
+        "relax_in",     iStatIn,
         "ignore_energy", ignore_energy, 
 	NULL) ;
     else
@@ -1336,6 +1392,8 @@ static gboolean properties (QCADDesignObject *obj, GtkWidget *widget)
         "function",     QCAD_CELL_FIXED,
         "polarization", gtk_adjustment_get_value (GTK_ADJUSTMENT (dialog.adjPolarization)),
         "clock",        iClock, 
+        "relax",        iStat,
+        "relax_in",     iStatIn,
 	"ignore_energy", ignore_energy, 	    
 	NULL) ;
     else // rbIO must be the case
@@ -1346,15 +1404,17 @@ static gboolean properties (QCADDesignObject *obj, GtkWidget *widget)
         "label",        gtk_entry_get_text (GTK_ENTRY (dialog.txtName)),
         "polarization", 0.0,
         "clock",        iClock, 
+        "relax",        iStat,
+        "relax_in",     iStatIn,
 	"ignore_energy", ignore_energy, 	    
 	NULL) ;
 #ifdef UNDO_REDO
     if (NULL != pentry)
       (*pentry) = qcad_design_object_get_state_undo_entry (obj, state_before,
-        qcad_design_object_get_state_array (obj, "function", "label", "polarization", "clock", "ignore_energy", NULL)) ;
+        qcad_design_object_get_state_array (obj, "function", "label", "polarization", "clock", "relax", "ignore_energy", NULL)) ;
 #endif /* UNDO_REDO */
     }
-  gtk_widget_hide (dialog.dlg) ;
+  gtk_widget_destroy (dialog.dlg);
   return bRet ;
   }
 #endif /* def GTK_GUI */
@@ -1562,7 +1622,7 @@ static void create_properties_dialog (PROPERTIES *dialog)
   gtk_window_set_title (GTK_WINDOW (dialog->dlg), _("Cell Function")) ;
   gtk_window_set_resizable (GTK_WINDOW (dialog->dlg), FALSE) ;
 
-  tblBig = gtk_table_new (2, 3, FALSE) ;
+  tblBig = gtk_table_new (4, 3, FALSE) ;
   gtk_widget_show (tblBig) ;
   gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog->dlg)->vbox), tblBig, TRUE, TRUE, 0) ;
   gtk_container_set_border_width (GTK_CONTAINER (tblBig), 2) ;
@@ -1672,6 +1732,37 @@ static void create_properties_dialog (PROPERTIES *dialog)
   gtk_table_attach (GTK_TABLE (tblBig), dialog->cbClock, 1, 2, 1, 2,
     (GtkAttachOptions)(GTK_FILL),
     (GtkAttachOptions)(0), 2, 2) ;
+//Sardinha
+  tbllbl = gtk_label_new (_("Relax In Clocks:")) ;
+  gtk_widget_show (tbllbl) ;
+  gtk_table_attach (GTK_TABLE (tblBig), tbllbl, 0, 1, 2, 3,
+    (GtkAttachOptions)(GTK_EXPAND | GTK_FILL),
+    (GtkAttachOptions)(GTK_EXPAND | GTK_FILL), 2, 2) ;
+  gtk_label_set_justify (GTK_LABEL (tbllbl), GTK_JUSTIFY_RIGHT) ;
+  gtk_misc_set_alignment (GTK_MISC (tbllbl), 1.0, 0.5) ;
+
+  dialog->adjRelax_in = GTK_ADJUSTMENT (gtk_adjustment_new (1, 1, MAX_CLOCK_RELAX, 1, 1, 1)) ;
+  dialog->spnRelax = gtk_spin_button_new (dialog->adjRelax_in, 1, 0) ;
+  gtk_widget_show (dialog->spnRelax) ;
+  gtk_table_attach (GTK_TABLE (tblBig), dialog->spnRelax, 1, 2, 2, 3,
+    (GtkAttachOptions)(GTK_EXPAND | GTK_FILL),
+    (GtkAttachOptions)(GTK_EXPAND), 2, 2) ;
+
+  tbllbl = gtk_label_new (_("Relax Clocks:")) ;
+  gtk_widget_show (tbllbl) ;
+  gtk_table_attach (GTK_TABLE (tblBig), tbllbl, 0, 1, 3, 4,
+    (GtkAttachOptions)(GTK_EXPAND | GTK_FILL),
+    (GtkAttachOptions)(GTK_EXPAND | GTK_FILL), 2, 2) ;
+  gtk_label_set_justify (GTK_LABEL (tbllbl), GTK_JUSTIFY_RIGHT) ;
+  gtk_misc_set_alignment (GTK_MISC (tbllbl), 1.0, 0.5) ;
+
+dialog->adjRelax = GTK_ADJUSTMENT (gtk_adjustment_new (1, 1, MAX_CLOCK_RELAX, 1, 1, 1)) ;
+  dialog->spnRelax = gtk_spin_button_new (dialog->adjRelax, 1, 0) ;
+  gtk_widget_show (dialog->spnRelax) ;
+  gtk_table_attach (GTK_TABLE (tblBig), dialog->spnRelax, 1, 2, 3, 4,
+    (GtkAttachOptions)(GTK_EXPAND | GTK_FILL),
+    (GtkAttachOptions)(GTK_EXPAND), 2, 2) ;
+//endmod
 
   dialog->chkignore_energy = gtk_check_button_new_with_label (_("Ignore Energy Dissipation")) ;
   gtk_widget_show (dialog->chkignore_energy) ;
