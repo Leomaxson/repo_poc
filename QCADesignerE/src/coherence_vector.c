@@ -36,7 +36,7 @@
 #include "coherence_vector.h"
 #include "custom_widgets.h"
 #include "global_consts.h"
-#include "print_util.h"
+#include "generic_utils.h"
 #ifdef GTK_GUI
   #include "callback_helpers.h"
 #endif /* def GTK_GUI */

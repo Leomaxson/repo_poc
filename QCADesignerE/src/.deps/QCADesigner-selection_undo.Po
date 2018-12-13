@@ -568,7 +568,7 @@ QCADesigner-selection_undo.o: selection_undo.c /usr/include/stdc-predef.h \
  objects/QCADDesignObject.h objects/QCADSubstrate.h objects/QCADLayer.h \
  selection_renderer.h exp_pixmap.h selection_undo.h \
  objects/QCADUndoEntry.h objects/QCADUndoEntryGroup.h \
- objects/QCADDOContainer.h
+ objects/QCADDOContainer.h generic_utils.h
 
 /usr/include/stdc-predef.h:
 
@@ -1873,3 +1873,5 @@ objects/QCADUndoEntry.h:
 objects/QCADUndoEntryGroup.h:
 
 objects/QCADDOContainer.h:
+
+generic_utils.h:

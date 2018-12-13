@@ -294,7 +294,7 @@ static void SimDataToPageData (print_graph_OP *pPO, PAGES *pPages, PRINT_GRAPH_D
 
   if (!icVisibleTraces) return ;
 
-  // Precalculate some parameters for each trace
+  // Calculate some parameters for each trace
   dcxEffective = pPO->iCXPages * (pPO->po.dPaperCX - pPO->po.dLMargin - pPO->po.dRMargin) ;
   dcyEffective = pPO->iCYPages * (pPO->po.dPaperCY - pPO->po.dTMargin - pPO->po.dBMargin) ;
   dcyTrace = (((dcyEffective - (FONT_SIZE + GAP_HEIGHT)) - (GAP_HEIGHT * icVisibleTraces)) - RULER_HEIGHT) / icVisibleTraces ;

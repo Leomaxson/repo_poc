@@ -582,8 +582,8 @@ QCADesigner-coherence_vector.o: coherence_vector.c \
  objects/object_helpers.h objects/QCADDesignObject.h \
  objects/QCADSubstrate.h objects/QCADLayer.h vector_table.h \
  coherence_vector.h /usr/include/assert.h custom_widgets.h \
- global_consts.h callback_helpers.h interface.h selection_renderer.h \
- exp_pixmap.h
+ global_consts.h generic_utils.h callback_helpers.h interface.h \
+ selection_renderer.h exp_pixmap.h
 
 /usr/include/stdc-predef.h:
 
@@ -1924,6 +1924,8 @@ coherence_vector.h:
 custom_widgets.h:
 
 global_consts.h:
+
+generic_utils.h:
 
 callback_helpers.h:
 

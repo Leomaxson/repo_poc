@@ -569,7 +569,7 @@ void updateNumberOfClocksUsed(DESIGN *design, int oldNumberOfClocks) {
     int clk, metaClk;
   
     if(design == NULL) {
-        return -1;
+        return;
     }
   
     maxClock = 0;

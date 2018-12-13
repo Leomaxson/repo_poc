@@ -107,7 +107,7 @@ extern GdkColor clrYellow ;
 extern GdkColor clrBlack ;
 
 static print_design_OP print_options =
-  {{612, 792, 72, 72, 72, 72, TRUE, TRUE, NULL}, 3, TRUE, FALSE, TRUE, TRUE, NULL, 0, 1, 1, 1} ;
+  {{612, 792, 72, 72, 72, 72, TRUE, TRUE, NULL}, 3, TRUE, FALSE, TRUE, TRUE, NULL, 0, 1, 1} ;
 
 extern char *layer_pixmap_stock_id[LAYER_TYPE_LAST_TYPE] ;
 

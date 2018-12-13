@@ -566,7 +566,7 @@ graph_dialog-graph_dialog_data.o: graph_dialog_data.c \
  objects/QCADSubstrate.h objects/QCADLayer.h vector_table.h \
  bus_layout_dialog.h support.h /usr/include/libintl.h \
  /usr/include/locale.h /usr/include/x86_64-linux-gnu/bits/locale.h \
- qcadstock.h print_util.h print.h simulation.h objects/QCADPrintDialog.h
+ qcadstock.h generic_utils.h
 
 /usr/include/stdc-predef.h:
 
@@ -1870,10 +1870,4 @@ support.h:
 
 qcadstock.h:
 
-print_util.h:
-
-print.h:
-
-simulation.h:
-
-objects/QCADPrintDialog.h:
+generic_utils.h:

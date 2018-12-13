@@ -39,6 +39,7 @@
 #include "objects/QCADUndoEntry.h"
 #include "objects/QCADUndoEntryGroup.h"
 #include "objects/QCADDOContainer.h"
+#include "generic_utils.h"
 
 #define DBG_UNDO_SEL_APPLY(s)
 

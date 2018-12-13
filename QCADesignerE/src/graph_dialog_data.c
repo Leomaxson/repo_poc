@@ -36,7 +36,7 @@
 #include "qcadstock.h"
 #include "graph_dialog_interface.h"
 #include "graph_dialog_data.h"
-#include "print_util.h"
+#include "generic_utils.h"
 
 GRAPH_DIALOG_DATA *graph_dialog_data_new (SIMULATION_OUTPUT *sim_output, gboolean bOKToFree, double dThreshLower, double dThreshUpper, int base)
   {
