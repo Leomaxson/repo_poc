@@ -39,6 +39,7 @@
 gboolean open_project_file (gchar *file_name, DESIGN **pdesign) ;
 gboolean open_project_file_fp (FILE *pfile, DESIGN **pdesign) ;
 gboolean check_project_file_magic_fp (FILE *pfile, double *pversion) ;
+gboolean check_project_file_number_clocks (FILE *pfile, int *nClocks);
 SIMULATION_OUTPUT *open_simulation_output_file (char *pszFName) ;
 SIMULATION_OUTPUT *open_simulation_output_file_fp (FILE *fp) ;
 coherence_energy_OP *open_coherence_energy_options_file (char *pszFName) ;

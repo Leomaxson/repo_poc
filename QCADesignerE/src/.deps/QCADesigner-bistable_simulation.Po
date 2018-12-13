@@ -585,7 +585,7 @@ QCADesigner-bistable_simulation.o: bistable_simulation.c \
  simulation.h simulation_data.h support.h /usr/include/libintl.h \
  /usr/include/locale.h /usr/include/x86_64-linux-gnu/bits/locale.h \
  bistable_simulation.h /usr/include/assert.h custom_widgets.h \
- global_consts.h
+ global_consts.h generic_utils.h
 
 /usr/include/stdc-predef.h:
 
@@ -1942,3 +1942,5 @@ bistable_simulation.h:
 custom_widgets.h:
 
 global_consts.h:
+
+generic_utils.h:
