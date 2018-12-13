@@ -151,7 +151,7 @@ batch_sim-bistable_simulation.o: bistable_simulation.c \
  objects/object_helpers.h objects/QCADDesignObject.h \
  objects/QCADSubstrate.h objects/QCADLayer.h vector_table.h \
  bistable_simulation.h /usr/include/assert.h custom_widgets.h \
- gdk_structs.h global_consts.h
+ gdk_structs.h global_consts.h generic_utils.h
 
 /usr/include/stdc-predef.h:
 
@@ -552,3 +552,5 @@ custom_widgets.h:
 gdk_structs.h:
 
 global_consts.h:
+
+generic_utils.h:

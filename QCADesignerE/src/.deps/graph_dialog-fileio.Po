@@ -586,7 +586,7 @@ graph_dialog-fileio.o: fileio.c /usr/include/stdc-predef.h \
  bistable_simulation.h support.h /usr/include/libintl.h \
  /usr/include/locale.h /usr/include/x86_64-linux-gnu/bits/locale.h \
  fileio_helpers.h global_consts.h custom_widgets.h \
- objects/QCADDOContainer.h
+ objects/QCADDOContainer.h generic_utils.h
 
 /usr/include/stdc-predef.h:
 
@@ -1945,3 +1945,5 @@ global_consts.h:
 custom_widgets.h:
 
 objects/QCADDOContainer.h:
+
+generic_utils.h:
