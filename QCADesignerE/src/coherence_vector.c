@@ -36,6 +36,7 @@
 #include "coherence_vector.h"
 #include "custom_widgets.h"
 #include "global_consts.h"
+#include "print_util.h"
 #ifdef GTK_GUI
   #include "callback_helpers.h"
 #endif /* def GTK_GUI */
@@ -219,12 +220,14 @@ simulation_data *run_coherence_simulation (int SIMULATION_TYPE, DESIGN *design, 
     }
 
   // create and initialize the clock data //
-  sim_data->clock_data = g_malloc0 (sizeof (struct TRACEDATA) * 4);
+  // TODO: This should come from 'design' variable. //
+  sim_data->number_of_zones = getNumberOfTotalClocks();
+  sim_data->clock_data = g_malloc0 (sizeof (struct TRACEDATA) * sim_data->number_of_zones);
 
-  for (i = 0; i < 4; i++)
+  for (i = 0; i < sim_data->number_of_zones; i++)
     {
     sim_data->clock_data[i].data_labels = g_strdup_printf ("CLOCK %d", i);
-    sim_data->clock_data[i].drawtrace = 1;
+    sim_data->clock_data[i].drawtrace = TRUE;
     sim_data->clock_data[i].trace_function = QCAD_CELL_FIXED;
     if (NULL == (sim_data->clock_data[i].data = g_malloc0 (sim_data->number_samples * sizeof (double))))
       printf("Could not allocate memory for clock data\n");
@@ -456,6 +459,31 @@ static void run_coherence_iteration (int sample_number, int number_of_cell_layer
         continue;
 
       clock_value = calculate_clock_value(sorted_cells[i][j]->cell_options.clock, sample_number, number_samples, total_number_of_inputs, options, SIMULATION_TYPE, pvt);
+      //Sardinha
+      if(clock_value == options->clock_low && !sorted_cells[i][j]->cell_options.already_low){
+        sorted_cells[i][j]->cell_options.already_low = TRUE;
+      }
+      else
+      if(clock_value == options->clock_high && sorted_cells[i][j]->cell_options.already_low){
+        sorted_cells[i][j]->cell_options.relax_in_count++;
+        if(sorted_cells[i][j]->cell_options.relax_in_count >= sorted_cells[i][j]->cell_options.relax_in){
+          sorted_cells[i][j]->cell_options.relax_count++;
+          sorted_cells[i][j]->cell_options.relax_in_count = sorted_cells[i][j]->cell_options.relax_in;
+        }
+        sorted_cells[i][j]->cell_options.already_low = FALSE;
+
+        if(sorted_cells[i][j]->cell_options.relax_count >= sorted_cells[i][j]->cell_options.relax_cycles){
+          sorted_cells[i][j]->cell_options.relax_count = 0;
+          sorted_cells[i][j]->cell_options.relax_in_count = 0;
+          if(QCAD_CELL_FIXED == sorted_cells[i][j]->cell_function && sorted_cells[i][j]->old_cell_function != QCAD_CELL_NULL){
+          	sorted_cells[i][j]->cell_function = sorted_cells[i][j]->old_cell_function;	
+          }
+        }else if(sorted_cells[i][j]->cell_options.relax_count == 1){
+          sorted_cells[i][j]->old_cell_function = sorted_cells[i][j]->cell_function;
+          sorted_cells[i][j]->cell_function = QCAD_CELL_FIXED;
+          qcad_cell_set_polarization (sorted_cells[i][j], 0.f);
+        }
+      }
 
       PEk = 0;
       // Calculate the sum of neighboring polarizations //
@@ -571,20 +599,30 @@ static inline double calculate_clock_value (unsigned int clock_num, unsigned lon
 
   if (SIMULATION_TYPE == EXHAUSTIVE_VERIFICATION)
     {
-    clock = optimization_options.clock_prefactor *
-      cos (((double) (1 << total_number_of_inputs)) * (double) sample * optimization_options.four_pi_over_number_samples - PI * (double)clock_num * 0.5) + optimization_options.clock_shift + options->clock_shift;
-
-    // Saturate the clock at the clock high and low values
-    clock = CLAMP (clock, options->clock_low, options->clock_high) ;
+    // TODO: 0.75 is a fudge factor to more-or-less center a set of clocks on the above lines.
+    // Moreover, we need to re-evaluate the clock computation and see if we really want cos here...
+    // Maybe a clock composed of straighter lines works better?
+    double cosval = 8.0 * cos (((double) (1 << total_number_of_inputs)) * (double) sample * optimization_options.four_pi_over_number_samples - PI * (double)(clock_num/getNumberOfClocks()) * 0.75);
+    cosval += getParameterB(clock_num % getNumberOfClocks(),getNumberOfClocks());
+    cosval = CLAMP (cosval, -1.0, 1.0) + 1.0;
+    cosval /= 2.0;
+    cosval *= (options->clock_high - options->clock_low);
+    cosval += options->clock_low;
+    clock = CLAMP (cosval, options->clock_low, options->clock_high) ;
     }
   else
   if (SIMULATION_TYPE == VECTOR_TABLE)
     {
-    clock = optimization_options.clock_prefactor *
-      cos (((double)pvt->vectors->icUsed) * (double) sample * optimization_options.two_pi_over_number_samples - PI * (double)clock_num * 0.5) + optimization_options.clock_shift + options->clock_shift;
-
-    // Saturate the clock at the clock high and low values
-    clock = CLAMP (clock, options->clock_low, options->clock_high) ;
+    // TODO: 0.75 is a fudge factor to more-or-less center a set of clocks on the above lines.
+    // Moreover, we need to re-evaluate the clock computation and see if we really want cos here...
+    // Maybe a clock composed of straighter lines works better?
+    double cosval = 8.0 * cos (((double)pvt->vectors->icUsed) * (double) sample * optimization_options.two_pi_over_number_samples - PI * (double)(clock_num/getNumberOfClocks()) * 0.75);
+    cosval += getParameterB(clock_num % getNumberOfClocks(),getNumberOfClocks());
+    cosval = CLAMP (cosval, -1.0, 1.0) + 1.0;
+    cosval /= 2.0;
+    cosval *= (options->clock_high - options->clock_low);
+    cosval += options->clock_low;
+    clock = CLAMP (cosval, options->clock_low, options->clock_high) ;
     }
 
   return clock;
